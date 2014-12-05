@@ -36,6 +36,7 @@ public class CheckoutResource {
 		transaction.setUserID(userid);
 		transaction.setTicketID(ticketid);
 		transaction.setPrice(price);
+		transaction.setQty(qty);
 		transaction.setTranType("processing");
 		cs.processCheckout(transaction);
 	}

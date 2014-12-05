@@ -10,4 +10,6 @@ public interface TicketDao {
 	public List<Ticket> queryTickets(String departureStationName, String arrivalStationName, 
 			int departureYear, int departureMonth, int departureDay, int departureHour,
 			int neededQty);
+	
+	public void updateQty(int ticketid, int qty);
 }

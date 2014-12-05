@@ -64,5 +64,13 @@ public class TicketDaoImpl implements TicketDao{
 		}, params);
 	}
 
+	@Override
+	public void updateQty(int ticketid, int qty) {
+		// TODO Auto-generated method stub
+		Object[] params = {qty, ticketid};
+		String sql = "update ticket set avaiQty = avaiQty-? where tickid = ?";
+		template.update(sql, params);
+	}
+
 
 }

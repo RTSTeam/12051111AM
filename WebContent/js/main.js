@@ -37,11 +37,11 @@ app.controller('SearchCtrl', function ($scope, $window, $http) {
 
 	$scope.tickets = [];
 	$scope.canShow = false;
-	
+
 	$scope.hideShow = function(){
 		$scope.canShow = false;
 	};
-	
+
 	// Search ticket
 	$scope.submitData = function (ticket, resultVarName) {
 		var params = $.param({ 	
@@ -106,7 +106,7 @@ app.controller('SearchCtrl', function ($scope, $window, $http) {
 			$scope[resultVarName] = "SUBMIT ERROR";
 		});
 	};
-	
+
 	// Personal information
 	$scope.personinfos = [];
 	$scope.getPersonInfoData = function(useridinput, resultVarName) {
@@ -120,11 +120,11 @@ app.controller('SearchCtrl', function ($scope, $window, $http) {
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 		}).success(function (data, status, headers, config) {
 			$scope[resultVarName] = data;
-			
+
 			if(angular.isArray(data.personinfo)){
 				$scope.personinfos = data.personinfo;
 			}
-			
+
 			else{
 				$scope.personinfos[0]=data.personinfo;
 			}
@@ -134,7 +134,7 @@ app.controller('SearchCtrl', function ($scope, $window, $http) {
 			$scope[resultVarName] = "SUBMIT ERROR";
 		});
 	};
-	
+
 	// Checkout
 	$scope.checkouts = [];
 	$scope.checkout = function (userid, ticket, resultVarName) {
@@ -164,6 +164,32 @@ app.controller('SearchCtrl', function ($scope, $window, $http) {
 		});
 	};
 
+	// Update Qty
+	$scope.updateQty = [];
+	$scope.updateQty = function (ticket, resultVarName) {
+		var params = $.param({ 	
+			ticketid: ticket.ticketID,
+			qty: $scope.user.adultsValue + $scope.user.seniorsValue + $scope.user.childrenValue 
+		});
+		$http({
+			method: "POST",
+			url: "http://localhost:8080/RTSProject/rest/updateQty",
+			data: params,
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+		}).success(function (data, status, headers, config) {
+			$scope[resultVarName] = data;
+			if(angular.isArray(data.updateQty)){
+				$scope.updateQtys = data.updateQty;
+			} else if(data.updateQty==null){
+			}
+			else{
+				$scope.updateQty[0]=data.updateQty;
+			}
+
+		}).error(function (data, status, headers, config) {
+			$scope[resultVarName] = "SUBMIT ERROR";
+		});
+	};
 
 	$scope.getAlert = function () {
 		$window.alert("hi");

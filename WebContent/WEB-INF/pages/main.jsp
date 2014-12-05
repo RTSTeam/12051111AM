@@ -199,7 +199,7 @@
 							      </div>
 							      <div class="modal-footer">
 							        <button type="button" class="btn btn-default" ng-click='hideShow()' data-dismiss="modal">Close</button>
-							        <button type="button" class="btn btn-primary" ng-click="hideShow(); checkout('${userid}',ticket, 'ajaxResult')" data-dismiss="modal">Confirmed</button>
+							        <button type="button" class="btn btn-primary" ng-click="hideShow(); checkout('${userid}',ticket, 'ajaxResult'); updateQty(ticket, 'ajaxResult')" data-dismiss="modal">Confirmed</button>
 							      </div>
 					    		</div>
 					  		</div>

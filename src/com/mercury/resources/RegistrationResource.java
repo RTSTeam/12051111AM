@@ -44,7 +44,7 @@ public class RegistrationResource {
 		rtsuser.setFname(fname);
 		rtsuser.setLname(lname);
 		rtsuser.setBirthday(RegistrationUtil.setBirthdayFormat(birthday));
-		rtsuser.setEmail(email);
+		rtsuser.setEmail(email.toLowerCase());
 		rtsuser.setStatus(1);
 		rtsuser.setAuthority("ROLE_USER");
 		return rs.process(rtsuser);

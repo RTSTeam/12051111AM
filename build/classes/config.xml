@@ -31,6 +31,11 @@
     	<property name="dataSource" ref="dataSource"/>
     </bean>
     
+    <bean id="stationService" class="com.mercury.service.StationService" autowire="byType"/>
+    <bean id="stationDao" class="com.mercury.dao.impl.StationDaoImpl">
+    	<property name="dataSource" ref="dataSource"/>
+    </bean>
+    
     <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
     	<property name="jndiName" value="java:comp/env/jdbc/myoracle" />
 	</bean>

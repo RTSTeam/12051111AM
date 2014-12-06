@@ -43,12 +43,34 @@ public class TransactionDaoImpl implements TransactionDao {
 	}
 
 	@Override
-	public void save(Transaction transaction) {
+	public void save(Transaction transaction, boolean hasRecord) {
 		// TODO Auto-generated method stub
 		Object[] params = {transaction.getUserID(), transaction.getTicketID(), 
 				transaction.getPrice(), transaction.getQty(), transaction.getTranType()};
-		String sql = "insert into transactions values((select Max(tranid)+1 from transactions),?,?,?,?,?)";
+		String sql =null;
+		if(hasRecord){
+		 sql= "insert into transactions values((select Max(tranid)+1 from transactions),?,?,?,?,?)";
+		}
+		else{
+			sql= "insert into transactions values(1,?,?,?,?,?)";
+		}
 		template.update(sql, params);
+	}
+
+
+	@Override
+	public void update(String tranID) {
+		Object[] params ={tranID};
+		String sql = "update transactions set trantype='processing' where tranID=? and tranType='Ordered'";
+		template.update(sql, params);
+	}
+	
+	@Override
+	public boolean hasRecord() {
+		Object[] params ={};
+		String sql = "select count(*) from transactions";
+		
+		return !(0==template.queryForInt(sql, params));
 	}
 
 }

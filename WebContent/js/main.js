@@ -106,7 +106,35 @@ app.controller('SearchCtrl', function ($scope, $window, $http) {
 			$scope[resultVarName] = "SUBMIT ERROR";
 		});
 	};
+	// Refund
+	$scope.refunds = [];
 
+	$scope.doRefund = function (tranIDinput, resultVarName) {
+		var params = $.param({ 	
+			tranID: tranIDinput
+		});
+		$http({
+			method: "POST",
+			url: "http://localhost:8080/RTSProject/rest/userrefund",
+			data: params,
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+		}).success(function (data, status, headers, config) {
+			$scope[resultVarName] = data;
+
+			if(angular.isArray(data.refund)){
+				$scope.refunds = data.refund;
+			}
+
+			else{
+				$scope.refunds[0]=data.refund;
+			}
+
+			//$scope.transactions = data.transaction;
+			$scope.canShow = true;
+		}).error(function (data, status, headers, config) {
+			$scope[resultVarName] = "SUBMIT ERROR";
+		});
+	};
 	// Personal information
 	$scope.personinfos = [];
 	$scope.getPersonInfoData = function(useridinput, resultVarName) {

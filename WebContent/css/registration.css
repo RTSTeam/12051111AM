@@ -7,3 +7,9 @@ input.ng-invalid.ng-dirty {
 input.ng-valid.ng-dirty {
     border: solid green 3px;
   }
+  
+#nameReq {color: red;}
+
+#nameLength {color: red;}
+
+#userExist {color: red;}

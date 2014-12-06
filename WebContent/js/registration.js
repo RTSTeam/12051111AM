@@ -11,7 +11,8 @@ app.controller('appCtrl', function($scope, $http ) {
   		};
 	$scope.users = [];
 	$scope.welcomeMsg = null;
-	$scope.canShow = false;
+	$scope.canShowForm=true;
+	$scope.canShowResult = false;
     
     var oriUser = angular.copy($scope.user);
 
@@ -43,7 +44,8 @@ app.controller('appCtrl', function($scope, $http ) {
 		$scope[resultVarName] = data;
 		$scope.users = data.user;
 		$scope.welcomeMsg = data.msg;
-		$scope.canShow = true;
+		$scope.canShowForm=false;
+		$scope.canShowResult = true;
 	}).error(function (data, status, headers, config) {
 		$scope[resultVarName] = "SUBMIT ERROR";
 	});

@@ -5,6 +5,7 @@
     	http://www.springframework.org/schema/beans
 		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
     
+    <bean id="QueryOrderedService" class="com.mercury.service.QueryOrderedService" autowire="byType"/>
     <bean id="RefundService" class="com.mercury.service.RefundService" autowire="byType"/>	
 	<bean id="RegistrationService" class="com.mercury.service.RegistrationService" autowire="byType"/>
     <bean id="RegistrationDao" class="com.mercury.dao.impl.RegistrationDaoImpl">

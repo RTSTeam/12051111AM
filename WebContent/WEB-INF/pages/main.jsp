@@ -73,7 +73,8 @@
 
 			<p></p>
 			<div class="controls">
-				<label for="departureStationSel">From:</label> <select
+				<label for="departureStationSel">From:</label> 
+				<select
 					class="form-control" id="departureStationSel"
 					ng-model="user.departureStationValue"
 					ng-options="departureStation for departureStation in departureStationArray">
@@ -172,91 +173,116 @@
 								aria-hidden="true">
 								<div class="modal-dialog">
 									<div class="modal-content">
-										<div class="modal-header">
-											<button type="button" class="close" data-dismiss="modal">
-												<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-											</button>
-											<h4 class="modal-title" id="myModalLabel">Enter Credit
-												Card Information:</h4>
-										</div>
-										<div class="modal-body">
-											<form novalidate name="paymentForm" ng-controller="MainCtrl">
-												<input class="form-control" type="text" name="creditCard"
-													ng-model="ccinfo.number" required data-credit-card-type
-													data-ng-pattern="/^[0-9]+$/" data-ng-minlength="15"
-													ng-model-options="{ updateOn: 'blur' }" luhn-check
-													maxlength="19" placeholder="Card Number">{{ccinfo.type}}
-												<span ng-show="paymentForm.creditCard.$error.pattern">Credit
-													card must consist of only numbers</span> <span
-													ng-show="paymentForm.creditCard.$error.minlength">Credit
-													card must be 15-19 digits</span> <span
-													ng-show="paymentForm.creditCard.$error.invalid">Credit
-													card must be a valid Amex, Visa, Discover, or Master Card</span> <span
-													ng-show="paymentForm.creditCard.$error['luhn-check']"
-													class='error'>Error: failed Luhn check</span> <span
-													ng-show="paymentForm.creditCard.required && paymentForm.creditCard.$pristine">Credit
-													Card number required</span> <br /> <input class="form-control"
-													type="text" name="securityCode"
-													ng-model="ccinfo.securityCode" placeholder="CCV" required
-													data-ng-pattern="/^[0-9]+$/" data-ng-minlength="3"
-													maxlength="4">
+									
+										<tabset>
+										<tab heading="Enter new card">
+											
+											<div ng-show="canShow">
+												<div class="modal-header">
+													
+													<h4 class="modal-title" id="myModalLabel">Enter Credit
+														Card Information:</h4>
+												</div>
+												<div class="modal-body">
+													
+														<form novalidate name="paymentForm" ng-controller="MainCtrl">
+														<!-- card holderName -->
+															<input style="width:200px" class="form-control" type="text" name="holderName" required minlength="3" maxlength="25" placeholder="Card Holder's name">
+														<br/>
+														<!-- card number -->
+															<input style="width:200px" class="form-control" type="text" name="creditCard"
+																ng-model="ccinfo.number" required data-credit-card-type
+																data-ng-pattern="/^[0-9]+$/" data-ng-minlength="15"
+																ng-model-options="{ updateOn: 'blur' }" luhn-check
+																maxlength="19" placeholder="Card Number">{{ccinfo.type}}
+															<br/>
+															<span ng-show="paymentForm.creditCard.$error.pattern">Credit
+																card must consist of only numbers</span> 
+															<span
+																ng-show="paymentForm.creditCard.$error.minlength">Credit
+																card must be 15-19 digits</span> 
+															<span ng-show="paymentForm.creditCard.$error.invalid">Credit
+																card must be a valid Amex, Visa, Discover, or Master Card</span>
+															<span
+																ng-show="paymentForm.creditCard.$error['luhn-check']"
+																class='error'>Error: failed Luhn check</span> 
+															<span
+																ng-show="paymentForm.creditCard.required && paymentForm.creditCard.$pristine">Credit
+																Card number required</span> 
+																
+																<br /> 
+															<input class="form-control" style="width:70px"
+																type="text" name="securityCode"
+																ng-model="ccinfo.securityCode" placeholder="CCV" required
+																data-ng-pattern="/^[0-9]+$/" data-ng-minlength="3"
+																maxlength="4">
 
-												<div
-													ng-show="paymentForm.submitAttempt && !paymentForm.$valid">
-													<div ng-show="myForm.number.$error['luhn-check']"
-														class='error'>Invalid card number</div>
-													<div ng-show="paymentForm.securityCode.$error.pattern">Security
-														code must contain only numbers</div>
-													<div ng-show="paymentForm.securityCode.$error.minlength">Security
-														code must be 3-4 digits</div>
-													<div ng-show="paymentForm.securityCode.$error.required">Security
-														code required</div>
+															<div
+																ng-show="paymentForm.submitAttempt && !paymentForm.$valid">
+																<div ng-show="myForm.number.$error['luhn-check']"
+																	class='error'>Invalid card number</div>
+																<div ng-show="paymentForm.securityCode.$error.pattern">Security
+																	code must contain only numbers</div>
+																<div ng-show="paymentForm.securityCode.$error.minlength">Security
+																	code must be 3-4 digits</div>
+																<div ng-show="paymentForm.securityCode.$error.required">Security
+																	code required</div>
+															</div>
+
+															<br />
+															<div class="widthcontrols">
+																<select class="form-control" ng-model="ccinfo.month"
+																	name="month" data-card-expiration required>
+																	<option disabled selected value="">Month</option>
+																	<option ng-repeat="month in months" value="{{$index+1}}">
+																		{{$index+1}} - {{month}}
+																		</li>
+																</select>
+															</div>
+															<br />
+															<ul
+																ng-show="paymentForm.submitAttempt && !paymentForm.$valid">
+																<li ng-show="paymentForm.month.$error.required">Expiration
+																	month required</li>
+															</ul>
+															<div class="widthcontrols">
+																<select class="form-control" ng-model="ccinfo.year"
+																	name="year" required>
+																	<option disabled selected value="">Year</option>
+																	<option
+																		ng-repeat="year in [] | range:currentYear:currentYear+13">
+																		{{year}}
+																		</li>
+																</select>
+															</div>
+															<br />
+															<ul
+																ng-show="paymentForm.submitAttempt && !paymentForm.$valid">
+																<li ng-show="paymentForm.year.$error.required">Expiration
+																	year required</li>
+																<li ng-show="paymentForm.month.$error.invalid">Provided
+																	expiration date is invalid</li>
+															</ul>
+
+														</form>									
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-default"
+														ng-click='hideShow()' data-dismiss="modal">Close</button>
+													<button type="button" class="btn btn-primary"
+														ng-click="hideShow(); checkout('${userid}',ticket, 'ajaxResult'); updateQty(ticket, 'ajaxResult')"
+														data-dismiss="modal">Confirmed</button>
 												</div>
 
-												<br />
-												<div class="widthcontrols">
-													<select class="form-control" ng-model="ccinfo.month"
-														name="month" data-card-expiration required>
-														<option disabled selected value="">Month</option>
-														<option ng-repeat="month in months" value="{{$index+1}}">
-															{{$index+1}} - {{month}}
-															</li>
-													</select>
-												</div>
-												<br />
-												<ul
-													ng-show="paymentForm.submitAttempt && !paymentForm.$valid">
-													<li ng-show="paymentForm.month.$error.required">Expiration
-														month required</li>
-												</ul>
-												<div class="widthcontrols">
-													<select class="form-control" ng-model="ccinfo.year"
-														name="year" required>
-														<option disabled selected value="">Year</option>
-														<option
-															ng-repeat="year in [] | range:currentYear:currentYear+13">
-															{{year}}
-															</li>
-													</select>
-												</div>
-												<br />
-												<ul
-													ng-show="paymentForm.submitAttempt && !paymentForm.$valid">
-													<li ng-show="paymentForm.year.$error.required">Expiration
-														year required</li>
-													<li ng-show="paymentForm.month.$error.invalid">Provided
-														expiration date is invalid</li>
-												</ul>
+											</div>	
+										</tab>
+										<tab heading="choose existing card">
+											<div ng-show="canShow">
 
-											</form>
-										</div>
-										<div class="modal-footer">
-											<button type="button" class="btn btn-default"
-												ng-click='hideShow()' data-dismiss="modal">Close</button>
-											<button type="button" class="btn btn-primary"
-												ng-click="hideShow(); checkout('${userid}',ticket, 'ajaxResult'); updateQty(ticket, 'ajaxResult')"
-												data-dismiss="modal">Confirmed</button>
-										</div>
+											</div>
+										</tab>
+
+									</tabset>
 									</div>
 								</div>
 							</div>
@@ -266,7 +292,9 @@
 				</tbody>
 			</table>
 		</div>
-		</tab> <!-- Transaction History --> <tab heading="Transaction History"
+		</tab>
+		<!-- Transaction History --> 
+		<tab heading="Transaction History"
 			ng-click="getTransactionData('${userid}', 'ajaxResult')">
 		<div ng-show="canShow">
 			<table border="2" class="table table-hover">
@@ -322,7 +350,7 @@
 		
 		
 		<!-- REFUND -->
-		<tab heading="Ticket Refund" ng-click="getTransactionData('${userid}', 'ajaxResult')">
+		<tab heading="Ticket Refund" ng-click="getOrderedData('${userid}', 'ajaxResult')">
 		<div ng-show="canShow">
 			<table border="2" class="table table-hover">
 				<thead>

@@ -31,6 +31,7 @@
     	<property name="dataSource" ref="dataSource"/>
     </bean>
     
+    <bean id="GetStationService" class="com.mercury.service.GetStationService" autowire="byType"/>
     <bean id="stationService" class="com.mercury.service.StationService" autowire="byType"/>
     <bean id="stationDao" class="com.mercury.dao.impl.StationDaoImpl">
     	<property name="dataSource" ref="dataSource"/>

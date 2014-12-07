@@ -36,14 +36,14 @@ public class StationDaoImpl implements StationDao {
 
 	@Override
 	public List<Station> queryAll() {
-		String sql = "select * from stations";
+		String sql = "select * from station";
 		return template.query(sql, new RowMapper<Station>() {
 			@Override
 			public Station mapRow(ResultSet rs, int line) throws SQLException {
 				Station station = new Station();
 				station.setSid(rs.getInt("sid"));
 				station.setStationAbbr(rs.getString("stationabbr"));
-				station.setStationAbbr(rs.getString("stationfullname"));
+				station.setStationFullName(rs.getString("stationfullname"));
 				return station;
 			}			
 		});

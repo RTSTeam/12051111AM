@@ -33,7 +33,7 @@
 </head>
 <body>
 
-	<div ng-controller="SearchCtrl">
+	<div ng-controller="SearchCtrl" data-ng-init="getStation('ajaxResult')">
 		<nav>
 
 		<div class="container">
@@ -77,14 +77,14 @@
 				<select
 					class="form-control" id="departureStationSel"
 					ng-model="user.departureStationValue"
-					ng-options="departureStation for departureStation in departureStationArray">
+					ng-options="station.stationFullName for station in stations">
 				</select>
 			</div>
 			<div class="controls">
 				<label for="arrivalStationSel">To:&nbsp; &nbsp; &nbsp;</label> <select
 					class="form-control" id="arrivalStationSel"
 					ng-model="user.arrivalStationValue"
-					ng-options="arrivalStation for arrivalStation in arrivalStationArray">
+					ng-options="station.stationFullName for station in stations"> <!-- ng-options="arrivalStation for arrivalStation in arrivalStationArray" -->
 				</select>
 			</div>
 			<br />

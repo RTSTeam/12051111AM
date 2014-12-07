@@ -46,8 +46,8 @@ app.controller('SearchCtrl', function ($scope, $window, $http) {
 	$scope.submitData = function (ticket, resultVarName) {
 		var params = $.param({ 	
 			tripType: ticket.tripType,
-			departureStationValue: ticket.departureStationValue,
-			arrivalStationValue: ticket.arrivalStationValue,
+			departureStationValue: ticket.departureStationValue.stationFullName,
+			arrivalStationValue: ticket.arrivalStationValue.stationFullName,
 			departureDate: ticket.departureDate,
 			departureTime: ticket.departureTime,
 			adultsValue: ticket.adultsValue,
@@ -78,6 +78,26 @@ app.controller('SearchCtrl', function ($scope, $window, $http) {
 		});
 	};
 
+	// Find Stations
+	$scope.stations = [];
+	$scope.getStation = function (resultVarName) {
+		$http({
+			method: "POST",
+			url: "http://localhost:8080/RTSProject/rest/getstation",
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+		}).success(function (data, status, headers, config) {
+			$scope[resultVarName] = data;
+			if(angular.isArray(data.station)){
+				$scope.stations = data.station;
+			}
+			else{
+				$scope.stations[0]=data.station;
+			}
+		}).error(function (data, status, headers, config) {
+			$scope[resultVarName] = "SUBMIT ERROR";
+		});
+	};
+	
 	// Transactions
 	$scope.transactions = [];
 	$scope.getTransactionData = function (useridinput, resultVarName) {

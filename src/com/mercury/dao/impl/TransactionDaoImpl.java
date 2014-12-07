@@ -93,7 +93,7 @@ public class TransactionDaoImpl implements TransactionDao {
 	@Override
 	public void update(String tranID) {
 		Object[] params ={tranID};
-		String sql = "update transactions set trantype='refunding' where tranID=? and tranType='processing'";
+		String sql = "update transactions set trantype='processing...' where tranID=? and tranType='Ordered'";
 		template.update(sql, params);
 	}
 

@@ -36,7 +36,7 @@ public class StationDaoImpl implements StationDao {
 
 	@Override
 	public List<Station> queryAll() {
-		String sql = "select * from station";
+		String sql = "select * from stations";
 		return template.query(sql, new RowMapper<Station>() {
 			@Override
 			public Station mapRow(ResultSet rs, int line) throws SQLException {

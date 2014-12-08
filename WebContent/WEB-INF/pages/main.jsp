@@ -28,8 +28,62 @@
 
 <!-- credit card css -->
 <link rel="stylesheet" href="css/creditcard.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular-resource.min.js"></script>
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+	var avaiQty = 1 ;
+	var soldQty = 1;
+  	google.load("visualization", "1", {packages:["corechart"]});
+  	// google.setOnLoadCallback(drawChart);
+  	function drawChart() {
+	
+    	var data = google.visualization.arrayToDataTable([
+      		[ 'Tickets Status', 'numbers'],
+      		[ 'Available Quantity', parseInt(avaiQty)],
+	  		[ 'Sold Quantity', parseInt(soldQty)]
+    	]);
+
+    	var options = {
+      		title: 'Ticket Statistic of That Day',
+      		pieHole: 0.4,
+    	};
+
+    	var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+		chart.draw(data, options);
+  	}
+  	$(document).ready(function(){
+		$("#depatureTime").blur(function(){
+			var departureStationID = parseInt($("#departureStationSel").val()) + 1;	// get departure station id
+			var arrivalStationID = parseInt($("#arrivalStationSel").val()) + 1;		// get arrival station id
+			var departureDate = $("#departureDate").val();
+			//alert(departureStationID + "-" + arrivalStationID + "-" + departureDate);
+			
+			var sendInfo = {
+				departureStationID: departureStationID,
+				arrivalStationID: arrivalStationID,
+				departureDate: departureDate
+			}; 
+			
+			$.ajax({
+				url: "http://localhost:8080/RTSProject/rest/ticketChart",
+				type: "post",
+				dataType: "xml",
+				data: sendInfo,
+				success:showTickets
+			});
+		});
+	});
+	function showTickets(response) {
+		// if datatype: "json", 
+		// avaiQty = response.avaiQty;
+		avaiQty = $(response).find("avaiQty").text();  
+		soldQty = $(response).find("soldQty").text();
+		//alert(avaiQty);
+		//alert(soldQty);
+		drawChart();
+	}
+</script>
+    
 </head>
 <body>
 
@@ -57,92 +111,98 @@
 		</div>
 		</nav>
 		<tabset> <tab heading="Search">
-		<form name="userForm" class="css-form"
-			ng-submit="submitData(user, 'ajaxResult')" novalidate>
-			<div ng-show="false" class="row">
-				<div class="col-md-2">
-					<input id="onewayRadio" type="radio" ng-model="user.tripType"
-						value="One Way"><label for="onewayRadio">One Way</label>
-				</div>
-				<div class="col-md-2">
-					<input id="roundtripRadio" type="radio" ng-model="user.tripType"
-						value="Round Trip" /><label for="roundtripRadio">Round
-						Trip</label>
-				</div>
-			</div>
-
-			<p></p>
-			<div class="controls">
-				<label for="departureStationSel">From:</label> 
-				<select
-					class="form-control" id="departureStationSel"
-					ng-model="user.departureStationValue"
-					ng-options="station.stationFullName for station in stations">
-				</select>
-			</div>
-			<div class="controls">
-				<label for="arrivalStationSel">To:&nbsp; &nbsp; &nbsp;</label> <select
-					class="form-control" id="arrivalStationSel"
-					ng-model="user.arrivalStationValue"
-					ng-options="station.stationFullName for station in stations"> <!-- ng-options="arrivalStation for arrivalStation in arrivalStationArray" -->
-				</select>
-			</div>
-			<br />
-			<div class="controls">
-				<label class="control-label"><i class="fa fa-calendar"></i>
-					Departure Time:</label><br>
-				<div class="form-group">
-					<input type="text" size="10" class="form-control"
-						ng-model="user.departureDate" data-autoclose="1"
-						placeholder="Date" bs-datepicker>
-				</div>
-				<div class="form-group" class="col-md-2">
-					<input type="text" size="8" class="form-control"
-						ng-model="user.departureTime" data-autoclose="1"
-						placeholder="Time" bs-timepicker>
-				</div>
-			</div>
-			<div class="padding">
-				<div class="row">
-					<div class="col-md-1">
-						<strong>Adults:</strong>
+		<div class="row">
+			<div class="col-md-6">
+				<form name="userForm" class="css-form"
+					ng-submit="submitData(user, 'ajaxResult')" novalidate>
+					<div ng-show="false" class="row">
+						<div class="col-md-2">
+							<input id="onewayRadio" type="radio" ng-model="user.tripType"
+								value="One Way"><label for="onewayRadio">One Way</label>
+						</div>
+						<div class="col-md-2">
+							<input id="roundtripRadio" type="radio" ng-model="user.tripType"
+								value="Round Trip" /><label for="roundtripRadio">Round
+								Trip</label>
+						</div>
 					</div>
-					<div class="col-md-1">
-						<strong>Seniors:</strong>
+		
+					<p></p>
+					<div class="controls">
+						<label for="departureStationSel">From:</label> 
+						<select
+							class="form-control" id="departureStationSel"
+							ng-model="user.departureStationValue"
+							ng-options="station.stationFullName for station in stations">
+						</select>
 					</div>
-					<div class="col-md-1">
-						<strong>Children:</strong>
+					<div class="controls">
+						<label for="arrivalStationSel">To:&nbsp; &nbsp; &nbsp;</label> <select
+							class="form-control" id="arrivalStationSel"
+							ng-model="user.arrivalStationValue"
+							ng-options="station.stationFullName for station in stations"> <!-- ng-options="arrivalStation for arrivalStation in arrivalStationArray" -->
+						</select>
 					</div>
-				</div>
+					<br />
+					<div class="controls">
+						<label class="control-label"><i class="fa fa-calendar"></i>
+							I Want to Departure After:</label><br>
+						<div class="form-group">
+							<input type="text" size="10" class="form-control" id="departureDate"
+								ng-model="user.departureDate" data-autoclose="1"
+								placeholder="Date" bs-datepicker>
+						</div>
+						<div class="form-group" class="col-md-2">
+							<input type="text" size="8" class="form-control" id="depatureTime"
+								ng-model="user.departureTime" data-autoclose="1"
+								placeholder="Time" bs-timepicker>
+						</div>
+					</div>
+					<div class="padding">
+						<div class="row">
+							<div class="col-md-2">
+								<strong>Adults:</strong>
+							</div>
+							<div class="col-md-2">
+								<strong>Seniors:</strong>
+							</div>
+							<div class="col-md-2">
+								<strong>Children:</strong>
+							</div>
+						</div>
+					</div>
+					<div class="padding">
+						<div class="row">
+							<div class="col-md-2">
+								<input class="form-control" type="number" min="0" max="10"
+									value="{{user.adultsValue}}" ng-model="user.adultsValue" />
+							</div>
+							<div class="col-md-2">
+								<input class="form-control" type="number" min="0" max="10"
+									value="{{user.seniorsValue}}" ng-model="user.seniorsValue" />
+							</div>
+							<div class="col-md-2">
+								<input class="form-control" type="number" min="0" max="10"
+									value="{{user.childrenValue}}" ng-model="user.childrenValue" />
+							</div>
+						</div>
+					</div>
+					<br />
+					<div class="controls">
+						<div class="row">
+							<!-- <div class="col-md-2">&nbsp; &nbsp;<button type="button" class="btn btn-warning" ng-click="resetForm()">Reset</button></div> -->
+							<div class="col-md-4">
+								<button type="submit" class="btn btn-success"
+									ng-disabled="userForm.$invalid">Find Trains</button>
+							</div>
+						</div>
+					</div>
+					<!-- <div id="piechart_3d" style="width: 100%; height: 300px;"></div> -->
+					<!-- <pre>form = {{user | json}}</pre> -->
+				</form>
 			</div>
-			<div class="padding">
-				<div class="row">
-					<div class="col-md-1">
-						<input class="form-control" type="number" min="0" max="10"
-							value="{{user.adultsValue}}" ng-model="user.adultsValue" />
-					</div>
-					<div class="col-md-1">
-						<input class="form-control" type="number" min="0" max="10"
-							value="{{user.seniorsValue}}" ng-model="user.seniorsValue" />
-					</div>
-					<div class="col-md-1">
-						<input class="form-control" type="number" min="0" max="10"
-							value="{{user.childrenValue}}" ng-model="user.childrenValue" />
-					</div>
-				</div>
-			</div>
-			<br />
-			<div class="controls">
-				<div class="row">
-					<!-- <div class="col-md-2">&nbsp; &nbsp;<button type="button" class="btn btn-warning" ng-click="resetForm()">Reset</button></div> -->
-					<div class="col-md-4">
-						<button type="submit" class="btn btn-success"
-							ng-disabled="userForm.$invalid">Find Trains</button>
-					</div>
-				</div>
-			</div>
-			<pre>form = {{user | json}}</pre>
-		</form>
+			<div class="col-md-6" id="piechart_3d" style="width: 50%; height: 300px;"></div>
+		</div>
 		<div ng-show="canShow">
 			<table table class="table table-hover">
 				<thead>
@@ -287,7 +347,6 @@
 								</div>
 							</div>
 						</td>
-
 					</tr>
 				</tbody>
 			</table>

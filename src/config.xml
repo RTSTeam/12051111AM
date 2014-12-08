@@ -17,6 +17,11 @@
     	<property name="dataSource" ref="dataSource"/>
     </bean>
     
+    <bean id="ShowTicketChartService" class="com.mercury.service.ShowTicketChartService" autowire="byType"/>
+    <bean id="ChartInfoDao" class="com.mercury.dao.impl.ChartInfoDaoImpl">
+    	<property name="dataSource" ref="dataSource"/>
+    </bean>
+    
     <bean id="transactionService" class="com.mercury.service.TransactionService" autowire="byType"/>
     <bean id="transactionDao" class="com.mercury.dao.impl.TransactionDaoImpl">
     	<property name="dataSource" ref="dataSource"/>

@@ -185,7 +185,7 @@ adminmain.controller("Ticket", function($scope, $http ) {
 adminmain.controller("Refund", function($scope, $http) {
 	$scope.transactions = [];
 	$scope.refunds = [];
-	
+	$scope.showTable=false;
 	$scope.getRefundingData = function (resultVarName) {
 		var params = $.param({ 	
 		});
@@ -199,10 +199,14 @@ adminmain.controller("Refund", function($scope, $http) {
 			$scope[resultVarName] = data;
 			if(angular.isArray(data.transaction)){
 				$scope.transactions = data.transaction;
+				$scope.showTable = true;
 			}
-			
+			else if(data.transaction==null){
+				$scope.showTable = false;
+			}
 			else{
 				$scope.transactions[0]=data.transaction;
+				$scope.showTable = true;
 			}
 			
 		}).error(function (data, status, headers, config) {

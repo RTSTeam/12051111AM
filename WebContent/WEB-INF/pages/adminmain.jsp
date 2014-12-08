@@ -311,7 +311,7 @@
 		
 	<!-- Fourth Part -->
 	<tab heading="Refund" ng-controller="Refund" ng-click="getRefundingData('ajaxResult')">
-		<table border="2" class="table table-hover">
+		<table border="2" class="table table-hover" ng-show="showTable">
 				<thead>
 					<tr>
 						<th>Transaction ID</th>

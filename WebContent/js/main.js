@@ -114,8 +114,9 @@ app.controller('SearchCtrl', function ($scope, $window, $http) {
 
 			if(angular.isArray(data.transaction)){
 				$scope.transactions = data.transaction;
+			} else if(data.ticket==null){
+				$scope.canShow = false;
 			}
-
 			else{
 				$scope.transactions[0]=data.transaction;
 			}

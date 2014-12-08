@@ -92,13 +92,13 @@ public class TransactionDaoImpl implements TransactionDao {
 	@Override
 	public void update(String tranID) {
 		Object[] params ={tranID};
-		String sql = "update transactions set trantype='processing...' where tranID=? and tranType='Ordered'";
+		String sql = "update transactions set trantype='Processing...' where tranID=? and tranType='Ordered'";
 		template.update(sql, params);
 	}
 	
 	@Override
 	public List<Transaction> queryRefundingTransactions(){
-		String sql = "SELECT * FROM transactions where trantype='processing'";
+		String sql = "SELECT * FROM transactions where trantype='Processing...'";
 		Object[] params = {};
 
 		return template.query(sql, new RowMapper<Transaction>() {
@@ -123,7 +123,7 @@ public class TransactionDaoImpl implements TransactionDao {
 	@Override
 	public void updateTypeToRefunded(String tranID){
 		Object[] params ={tranID};
-		String sql = "update transactions set trantype='Refunded' where tranID=? and tranType='processing'";
+		String sql = "update transactions set trantype='Refunded' where tranID=? and tranType='Processing...'";
 		template.update(sql, params);
 	}
 

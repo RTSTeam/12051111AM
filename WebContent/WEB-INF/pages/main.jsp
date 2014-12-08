@@ -354,8 +354,8 @@
 		</tab>
 		<!-- Transaction History --> 
 		<tab heading="Transaction History"
-			ng-click="getTransactionData('${userid}', 'ajaxResult')">
-		<div ng-show="canShow">
+			ng-click="getTransactionData('${userid}', 'ajaxResult'); hideShow()">
+
 			<table border="2" class="table table-hover">
 				<thead width="600px">
 					<tr>
@@ -376,7 +376,7 @@
 					</tr>
 				</tbody>
 			</table>
-		</div>
+
 		</tab> 
 		
 		
@@ -409,8 +409,8 @@
 		
 		
 		<!-- REFUND -->
-		<tab heading="Ticket Refund" ng-click="getOrderedData('${userid}', 'ajaxResult')">
-		<div ng-show="canShow">
+		<tab heading="Ticket Refund" ng-click="getOrderedData('${userid}', 'ajaxResult'); hideShow()">
+
 			<table border="2" class="table table-hover">
 				<thead>
 					<tr>
@@ -455,7 +455,7 @@
 					</tr>
 				</tbody>
 			</table>
-		</div>
+
 		</tab> 
 		
 		</tabset>

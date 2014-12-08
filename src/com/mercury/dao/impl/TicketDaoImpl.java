@@ -51,7 +51,7 @@ public class TicketDaoImpl implements TicketDao{
 			int neededQty) {
 		// TODO Auto-generated method stub
 		String sql = "SELECT * FROM ticket WHERE departureStationName=? AND arrivalStationName=?" +
-						"AND departureYear=? AND departureMonth=? AND departureDay=? AND departureHour>=? AND avaiQty>=?";
+						"AND departureYear=? AND departureMonth=? AND departureDay=? AND departureHour>=? AND avaiQty>=? order by departureHour";
 		Object[] params = {departureStationName, arrivalStationName, departureYear, departureMonth, departureDay,
 							departureHour, neededQty};	
 		return template.query(sql, new RowMapper<Ticket>() {

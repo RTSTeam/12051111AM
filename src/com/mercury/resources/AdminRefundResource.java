@@ -11,24 +11,24 @@ import javax.ws.rs.core.MediaType;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.mercury.service.UpdateQtyService;
+import com.mercury.service.AdminRefundService;
 
-@Path("/updateQty")
-public class UpdateQtyResource {
-	private UpdateQtyService uqs;
+@Path("/admindorefund")
+public class AdminRefundResource {
+	private AdminRefundService ars;
 	
-	public UpdateQtyResource() {
-		if (uqs==null) {
+	public AdminRefundResource(){
+		if (ars==null) {
 			ApplicationContext actx = new ClassPathXmlApplicationContext("config.xml");
-			uqs = (UpdateQtyService)actx.getBean("UpdateQtyService");
+			ars = (AdminRefundService)actx.getBean("adminRefundService");
 		}
 	}
 	
 	@POST
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public void execute(
-			@FormParam("ticketid") int ticketid,
-			@FormParam("qty") int qty) throws NoSuchAlgorithmException {
-		uqs.process(ticketid, qty);
+			@FormParam("tranID") String tranID
+			) throws NoSuchAlgorithmException {
+		ars.processRefund(tranID);
 	}
 }

@@ -27,7 +27,22 @@ public class StationDaoImpl implements StationDao {
 		template.update(sql, params);
 
 	}
+	
+	@Override
+	public void save(Station station,  boolean hasRecord) {
+		Object[] params = {station.getStationAbbr(), station.getStationFullName()};
 
+		String sql =null;
+		if(hasRecord){
+		 sql= "insert into stations values((select Max(sid)+1 from stations),?,?)";
+		}
+		else{
+			sql= "insert into stations values(1,?,?)";
+		}
+		template.update(sql, params);
+
+	}
+	
 	@Override
 	public void delete(Station station) {
 		// TODO Auto-generated method stub
@@ -47,6 +62,14 @@ public class StationDaoImpl implements StationDao {
 				return station;
 			}			
 		});
+	}
+	
+	@Override
+	public boolean hasRecord() {
+		Object[] params ={};
+		String sql = "select count(*) from stations";
+		
+		return !(0==template.queryForInt(sql, params));
 	}
 
 }

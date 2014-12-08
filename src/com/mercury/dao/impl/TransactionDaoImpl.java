@@ -10,7 +10,6 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
 
 import com.mercury.beans.Transaction;
-import com.mercury.beans.User;
 import com.mercury.dao.TransactionDao;
 
 public class TransactionDaoImpl implements TransactionDao {
@@ -94,6 +93,37 @@ public class TransactionDaoImpl implements TransactionDao {
 	public void update(String tranID) {
 		Object[] params ={tranID};
 		String sql = "update transactions set trantype='processing...' where tranID=? and tranType='Ordered'";
+		template.update(sql, params);
+	}
+	
+	@Override
+	public List<Transaction> queryRefundingTransactions(){
+		String sql = "SELECT * FROM transactions where trantype='processing'";
+		Object[] params = {};
+
+		return template.query(sql, new RowMapper<Transaction>() {
+			@Override
+			public Transaction mapRow(ResultSet rs, int line) throws SQLException {
+				// TODO Auto-generated method stub
+				Transaction transaction = new Transaction();
+				//int tid = rs.getInt("tranid");
+				//System.out.println("Tid is: " + tid);
+				//transaction.setTranID(tid);
+				transaction.setTranID(rs.getInt("tranid"));
+				transaction.setUserID(rs.getString("userid"));
+				transaction.setTicketID(rs.getInt("ticketid"));
+				transaction.setPrice(rs.getDouble("price"));
+				transaction.setQty(rs.getInt("qty"));
+				transaction.setTranType(rs.getString("trantype"));
+				return transaction;
+			}			
+		}, params);
+	}
+	
+	@Override
+	public void updateTypeToRefunded(String tranID){
+		Object[] params ={tranID};
+		String sql = "update transactions set trantype='Refunded' where tranID=? and tranType='processing'";
 		template.update(sql, params);
 	}
 

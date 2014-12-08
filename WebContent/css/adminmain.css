@@ -1,0 +1,9 @@
+ #stationDiv1 
+{
+	float:left; background-color:white; width:40%; height:180px;
+}
+
+#stationDiv2
+{
+	background-color: white; width:60%;height:180px; float:right;
+}

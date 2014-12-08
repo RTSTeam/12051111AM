@@ -5,7 +5,6 @@ import java.util.Properties;
 import java.util.Date;
 import javax.mail.*;                  // Include Authenticator, Message, PasswordAuthentication, Session, Transport
 import javax.mail.internet.*;     // Include InternetAddress, MimeMessage
-import javax.*;
 
 public class SendJavaMail {
 	

@@ -13,32 +13,44 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 
 import com.mercury.beans.Station;
-import com.mercury.beans.StationInfo;
-import com.mercury.service.StationService;
+import com.mercury.service.InsertStationService;
 
 
 @Path("/insertstation")
 public class InsertStationResource {
-	private StationService ss;
+	private InsertStationService iss;
 	
 	public InsertStationResource() {
-		if (ss==null) {
+		if (iss==null) {
 			ApplicationContext actx = new ClassPathXmlApplicationContext("config.xml");
-			ss = (StationService)actx.getBean("stationService");
+			iss = (InsertStationService)actx.getBean("insertStationService");
 		}
 	}
 	
 	@POST
-	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	public StationInfo execute(
-			@FormParam("stationid") int sid,
+	@Produces({MediaType.TEXT_HTML})
+	public String execute(
 			@FormParam("stationabbrevation") String stationAbbr,
 			@FormParam("stationfullname") String stationFullName
 			) throws NoSuchAlgorithmException {
 		Station station = new Station();
-		station.setSid(sid);
+		station.setStationAbbr(stationAbbr);
+		station.setStationFullName(stationFullName);
+		iss.saveProcess(station);
+		StringBuilder result = new StringBuilder();
+		result.append("You insert a new record: ").append(stationAbbr).append(stationFullName);
+		return  result.toString();
+	} 
+	
+	/*@POST
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	public StationInfo execute(
+			@FormParam("stationabbrevation") String stationAbbr,
+			@FormParam("stationfullname") String stationFullName
+			) throws NoSuchAlgorithmException {
+		Station station = new Station();
 		station.setStationAbbr(stationAbbr);
 		station.setStationFullName(stationFullName);
 		return ss.saveProcess(station);
-	}
+	}*/
 }

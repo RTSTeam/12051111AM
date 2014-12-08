@@ -1,5 +1,7 @@
 package com.mercury.controllers;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,9 +21,11 @@ public class AdminMainController {
 	
 	@RequestMapping(value ="/adminmain", method = RequestMethod.GET)
     public ModelAndView method() {
-	 		ModelAndView mav = new ModelAndView();
-	 		mav.setViewName("adminmain");
-            return mav;
-
+		ModelAndView mav = new ModelAndView();
+ 		mav.setViewName("adminmain");
+ 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+ 		String name = auth.getName();
+ 		mav.addObject("userid", name);
+ 		return mav;
     }
 }

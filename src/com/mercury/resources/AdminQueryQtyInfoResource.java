@@ -11,24 +11,25 @@ import javax.ws.rs.core.MediaType;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.mercury.service.UpdateQtyService;
+import com.mercury.beans.TicketInfo;
+import com.mercury.service.AdminQueryQtyInfoService;
 
-@Path("/updateQty")
-public class UpdateQtyResource {
-	private UpdateQtyService uqs;
+@Path("/findallqty")
+public class AdminQueryQtyInfoResource {
+	private AdminQueryQtyInfoService aqqis;
 	
-	public UpdateQtyResource() {
-		if (uqs==null) {
+	public AdminQueryQtyInfoResource(){
+		if (aqqis==null) {
 			ApplicationContext actx = new ClassPathXmlApplicationContext("config.xml");
-			uqs = (UpdateQtyService)actx.getBean("UpdateQtyService");
+			aqqis = (AdminQueryQtyInfoService)actx.getBean("adminQueryQtyInfoService");
 		}
 	}
 	
 	@POST
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	public void execute(
-			@FormParam("ticketid") int ticketid,
-			@FormParam("qty") int qty) throws NoSuchAlgorithmException {
-		uqs.process(ticketid, qty);
-	}
+	public  TicketInfo execute(
+			) throws NoSuchAlgorithmException {
+		
+		return aqqis.queryQTYProcess();
+	}		
 }

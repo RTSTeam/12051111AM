@@ -11,27 +11,27 @@ import javax.ws.rs.core.MediaType;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.mercury.beans.TransactionInfo;
-import com.mercury.service.TransactionService;
+import com.mercury.service.AdminUpdateQtyService;
 
-
-@Path("/usertransaction")
-public class TransactionResource {
-	private TransactionService ts;
+@Path("/adminupdateqty")
+public class AdminUpdateQtyResource {
+	private AdminUpdateQtyService auqs;
 	
-	public TransactionResource(){
-		if (ts==null) {
+	public AdminUpdateQtyResource(){
+		if (auqs==null) {
 			ApplicationContext actx = new ClassPathXmlApplicationContext("config.xml");
-			ts = (TransactionService)actx.getBean("transactionService");
+			auqs = (AdminUpdateQtyService)actx.getBean("adminUpdateQtyService");
 		}
 	}
 	
 	@POST
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	public TransactionInfo execute(
-			@FormParam("userid") String userid
+	public  void execute(
+			@FormParam("ticketID") int ticketID,
+			@FormParam("newtotalqty") int newtotalqty,
+			@FormParam("newavailqty") int newavailqty
 			) throws NoSuchAlgorithmException {
-		
-		return ts.process(userid);
-	}
+		auqs.updateTwoTypeQtyProcess(ticketID, newtotalqty, newavailqty);
+		return;
+	}	
 }

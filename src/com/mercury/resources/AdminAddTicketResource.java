@@ -78,8 +78,8 @@ public class AdminAddTicketResource {
 		
 		
 		//Sun Dec 14 2014 00:00:00 GMT-0500 (Eastern Standard Time)
-				String[] contentDateA = departureDate.split(" ");
-				String[] contentTimeA = departureTime.split(" ");
+				String[] contentDateA = arrivalDate.split(" ");
+				String[] contentTimeA = arrivalTime.split(" ");
 				int arrivalYear = Integer.parseInt(contentDateA[3]);
 				String arrivalMonthStr = contentDateA[1];
 				

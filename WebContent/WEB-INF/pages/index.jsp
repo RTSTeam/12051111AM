@@ -262,7 +262,7 @@
 			        <div class="control-group" ng-controller="DatepickerDemoCtrl">
 			          <label class="control-label" for="lname">Birthday</label>
 			          <div class="controls">
-			           <input type="text" ng-model="user.birthday" name="birthday" class="form-control" datepicker-popup="dd-MMMM-yy" is-open="opened" min-date="1990-01-01" max-date="today" datepicker-options="dateOptions"  data-date-format="mm/dd/yyyy" placeholder="Date of Birthday" ng-required="true" close-text="Close" required/>
+			           <input type="text" ng-model="user.birthday" name="birthday" class="form-control" datepicker-popup="dd-MMMM-yy" is-open="opened" min-date="1990-01-01" max-date="maxDate" datepicker-options="dateOptions"  data-date-format="mm/dd/yyyy" placeholder="Date of Birthday" ng-required="true" close-text="Close" required/>
 			                    <button type="button" class="btn btn-default" ng-click="open($event)">
 			                      <i class="glyphicon glyphicon-calendar"></i>
 			                    </button>

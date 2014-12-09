@@ -123,10 +123,13 @@ public class TransactionDaoImpl implements TransactionDao {
 	}
 	
 	@Override
-	public void updateTypeToRefunded(String tranID){
+	public void updateTypeToRefunded(int tranID, int ticketID, int qty){
 		Object[] params ={tranID};
 		String sql = "update transactions set trantype='Refunded' where tranID=? and tranType='Processing...'";
 		template.update(sql, params);
+		Object[] params1 ={qty, ticketID};
+		sql = "update ticket set avaiQty = avaiQty+? where tickid = ?";
+		template.update(sql, params1);
 	}
 
 }

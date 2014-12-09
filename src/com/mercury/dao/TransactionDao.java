@@ -10,5 +10,5 @@ public interface TransactionDao {
 	public void save(Transaction transaction, boolean hasRecord);
 	public List<Transaction> queryTransactions(String userid);
 	public List<Transaction> queryRefundingTransactions();
-	public void updateTypeToRefunded(String tranID);
+	public void updateTypeToRefunded(int tranID, int ticketID, int qty);
 }

@@ -63,7 +63,7 @@ adminmain.controller("Ticket", function($scope, $http ) {
 			newavailqty: newticket.availqty
 		});
 		
-		alert("hi");
+		//alert("hi");
 		$http({
 			method: "POST",
 			url: "http://localhost:8080/RTSProject/rest/adminupdateqty",
@@ -72,7 +72,7 @@ adminmain.controller("Ticket", function($scope, $http ) {
 			
 		}).success(function (data, status, headers, config) {
 			//$scope[resultVarName] = data;
-			alert("hi");
+			//alert("hi");
 			
 		}).error(function (data, status, headers, config) {
 			$scope[resultVarName] = "SUBMIT ERROR";
@@ -136,7 +136,7 @@ adminmain.controller("Ticket", function($scope, $http ) {
 				//alert("success");
 			}
 			$scope.canShowResult=true;
-			alert("hi");
+			//alert("hi");
 			
 		}).error(function (data, status, headers, config) {
 			$scope[resultVarName] = "SUBMIT ERROR";
@@ -214,9 +214,11 @@ adminmain.controller("Refund", function($scope, $http) {
 		});
 	};
 	
-	$scope.returnRefund = function (tranIDinput, resultVarName) {
+	$scope.returnRefund = function (tranIDinput, ticketIDInput, qtyInput,  resultVarName) {
 		var params = $.param({ 	
-			tranID: tranIDinput
+			tranID: tranIDinput,
+			ticketID: ticketIDInput,
+			qty: qtyInput
 		});
 		$http({
 			method: "POST",

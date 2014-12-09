@@ -13,8 +13,8 @@ public class AdminRefundService {
 		this.td = td;
 	}
 	
-	public void processRefund(String tranID) {
+	public void processRefund(int tranID, int ticketID, int qty) {
 		//td.update(tranID);
-		td.updateTypeToRefunded(tranID);
+		td.updateTypeToRefunded(tranID, ticketID, qty);
 	}
 }

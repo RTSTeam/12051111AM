@@ -27,8 +27,10 @@ public class AdminRefundResource {
 	@POST
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public void execute(
-			@FormParam("tranID") String tranID
+			@FormParam("tranID") int tranID,
+			@FormParam("ticketID") int ticketID,
+			@FormParam("qty") int qty
 			) throws NoSuchAlgorithmException {
-		ars.processRefund(tranID);
+		ars.processRefund(tranID, ticketID, qty);
 	}
 }

@@ -2,7 +2,6 @@ package com.mercury.resources;
 
 import java.security.NoSuchAlgorithmException;
 
-import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;

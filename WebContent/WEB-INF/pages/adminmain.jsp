@@ -98,7 +98,7 @@
 			</div>	  
 		</form>-->
 		<form name="tracmodify" class="form-inline" id="stationDiv1" role="form">
-			Search: <input ng-model="searchText" ng-click="findAllStation()">
+			Search: <input ng-model="searchText">
 			<table id="searchTextResults">
 			  <tr><th>Station Abbr</th><th>Station FullName</th></tr>
 			  <tr ng-repeat="station in stations | filter:searchText">
@@ -134,7 +134,7 @@
 	        		</div>
 		 
 		      	<button type="button" ng-click="resetForm()" ng-disabled="!isUserChanged()">Reset</button>
-			  	<button type="button" ng-click="submitData(station, 'ajaxResult')" ng-disabled="userForm.$invalid">Submit</button>
+			  	<button type="button" ng-click="submitData(station, 'ajaxResult'); findAllStation()" ng-disabled="userForm.$invalid">Submit</button>
 	      		</form>
 			</div>
 			
@@ -175,8 +175,8 @@
 								<td>{{ticketqty.ticketID}}</td>
 								<td>{{ticketqty.totalQty}}</td>
 								<td>{{ticketqty.avaiQty}}</td>
-								<td><input type="number" ng-model="newticket.totalqty" placeholder="New Total Quantity" required></td>
-								<td><input type="number" ng-model="newticket.availqty" placeholder="New Available Quantity" required></td>
+								<td><input type="number" ng-model="newticket.totalqty" placeholder="New Total Quantity" min="0" required></td>
+								<td><input type="number" ng-model="newticket.availqty" placeholder="New Available Quantity" min="0" required></td>
 								<td>
 									<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModalUpdateQTY" ng-click="updateQty(ticketqty.ticketID, newticket, 'ajaxResult')">
 									Change
@@ -264,7 +264,7 @@
 					<div class="controls">
 						<label class="control-label">Price</label><br>
 						<div class="form-group">
-							<input type="number" ng-model="ticket.price" placeholder="Price" required>
+							<input type="number" ng-model="ticket.price" placeholder="Price" min="0" required>
 							<span class="error" ng-show="myForm.input.$error.required">
 							    Required!</span>
 							<span class="error" ng-show="myForm.input.$error.number">
@@ -276,7 +276,7 @@
 					<div class="controls">
 						<label class="control-label">Total Quantity</label><br>
 						<div class="form-group">
-							<input type="number" ng-model="ticket.totalqty" placeholder="Total Quantity" required>
+							<input type="number" ng-model="ticket.totalqty" placeholder="Total Quantity" min="0" required>
 							<span class="error" ng-show="myForm.input.$error.required">
 							    Required!</span>
 							<span class="error" ng-show="myForm.input.$error.number">
@@ -288,7 +288,7 @@
 					<div class="controls">
 						<label class="control-label">Available Quantity</label><br>
 						<div class="form-group">
-							<input type="number" ng-model="ticket.avalqty" placeholder="Available Quantity" required>
+							<input type="number" ng-model="ticket.avalqty" placeholder="Available Quantity" min="0" required>
 							<span class="error" ng-show="myForm.input.$error.required">
 							    Required!</span>
 							<span class="error" ng-show="myForm.input.$error.number">
@@ -330,7 +330,7 @@
 						<td>{{transaction.qty}}</td>
 						<td>{{transaction.tranType}}</td>
 						<td>
-							<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModalDoRefund" ng-click="returnRefund(transaction.tranID, 'ajaxResult')">
+							<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModalDoRefund" ng-click="returnRefund(transaction.tranID, transaction.ticketID, transaction.qty, 'ajaxResult')">
 							Refund
 							</button>
 							<div class="control-group">
@@ -342,7 +342,7 @@
 									        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 									        <h4 class="modal-title" id="myModalLabel">Your request will be processed in 1 minute.</h4>
 									     
-									        <button type="button" class="btn btn-default" ng-clilck="$window.close()" data-dismiss="modal">Close</button>
+									        <button type="button" class="btn btn-default" ng-clilck="getRefundingData('ajaxResult')" data-dismiss="modal">Close</button>
 									        <button type="button" class="btn btn-default"><a href="http://localhost:8080/RTSProject/adminmain.html">Go back</a></button>
 									      
 							    			</div>

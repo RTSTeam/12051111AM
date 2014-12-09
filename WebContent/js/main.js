@@ -36,10 +36,9 @@ app.controller('SearchCtrl', function ($scope, $window, $http) {
 	};
 
 	$scope.tickets = [];
-	$scope.canShow = false;
-
 	$scope.hideShow = function(){
 		$scope.canShow = false;
+
 	};
 
 	// Search ticket
@@ -99,6 +98,8 @@ app.controller('SearchCtrl', function ($scope, $window, $http) {
 	};
 	
 	// Transactions
+
+	$scope.showTransaction = false;
 	$scope.transactions = [];
 	$scope.getTransactionData = function (useridinput, resultVarName) {
 		var params = $.param({ 	
@@ -114,20 +115,54 @@ app.controller('SearchCtrl', function ($scope, $window, $http) {
 
 			if(angular.isArray(data.transaction)){
 				$scope.transactions = data.transaction;
+				$scope.showTransaction = true;
 			} else if(data.ticket==null){
-				$scope.canShow = false;
+				$scope.showTransaction = false;
 			}
 			else{
+				$scope.showTransaction = true;
 				$scope.transactions[0]=data.transaction;
 			}
 
-			//$scope.transactions = data.transaction;
-			$scope.canShow = true;
+
+		}).error(function (data, status, headers, config) {
+			$scope[resultVarName] = "SUBMIT ERROR";
+		});
+	};
+	
+	// Refund display
+
+	$scope.showRefund = true;
+	$scope.ordereds = [];
+	$scope.getOrderedData = function (useridinput, resultVarName) {
+		var params = $.param({ 	
+			userid: useridinput
+		});
+		$http({
+			method: "POST",
+			url: "http://localhost:8080/RTSProject/rest/userQueryOrdered",
+			data: params,
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+		}).success(function (data, status, headers, config) {
+			$scope[resultVarName] = data;
+			if(angular.isArray(data.ordered)){
+				$scope.ordereds = data.ordered;
+				$scope.showRefund = true;
+			} else if(data.ordered==null){
+				$scope.showRefund = false;
+			}
+			else{
+				$scope.showRefund = true;
+				$scope.ordereds[0]=data.ordered;
+			}
+
+
 		}).error(function (data, status, headers, config) {
 			$scope[resultVarName] = "SUBMIT ERROR";
 		});
 	};
 	// Refund
+
 	$scope.refunds = [];
 
 	$scope.doRefund = function (tranIDinput, resultVarName) {
@@ -140,23 +175,27 @@ app.controller('SearchCtrl', function ($scope, $window, $http) {
 			data: params,
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 		}).success(function (data, status, headers, config) {
+			alert(refund);
 			$scope[resultVarName] = data;
 
-			if(angular.isArray(data.refund)){
-				$scope.refunds = data.refund;
-			}
-
+			if(angular.isArray(data.ordered)){
+				$scope.refunds = data.ordered;
+			} 
 			else{
+
 				$scope.refunds[0]=data.refund;
 			}
 
-			//$scope.transactions = data.transaction;
-			$scope.canShow = true;
+
 		}).error(function (data, status, headers, config) {
 			$scope[resultVarName] = "SUBMIT ERROR";
 		});
 	};
 	// Personal information
+	$scope.hidePerson = function(){
+		$scope.showPerson = false;
+
+	};
 	$scope.personinfos = [];
 	$scope.getPersonInfoData = function(useridinput, resultVarName) {
 		var params = $.param({ 	
@@ -178,7 +217,7 @@ app.controller('SearchCtrl', function ($scope, $window, $http) {
 				$scope.personinfos[0]=data.personinfo;
 			}
 
-			$scope.canShow = true;
+			$scope.showPerson = true;
 		}).error(function (data, status, headers, config) {
 			$scope[resultVarName] = "SUBMIT ERROR";
 		});
@@ -318,6 +357,7 @@ app.filter
 			return filter;
 		}
 );
+
 
 app.directive('luhnCheck', function() {
 	return {

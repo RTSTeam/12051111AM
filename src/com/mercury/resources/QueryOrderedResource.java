@@ -12,7 +12,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 
-import com.mercury.beans.TransactionInfo;
+import com.mercury.beans.OrderedInfo;
 import com.mercury.service.QueryOrderedService;
 
 
@@ -29,10 +29,10 @@ public class QueryOrderedResource {
 	
 	@POST
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	public TransactionInfo execute(
+	public OrderedInfo execute(
 			@FormParam("userid") String userid
 			) throws NoSuchAlgorithmException {
 		
-		return qs.process(userid);
+		return qs.processQuery(userid);
 	}
 }

@@ -67,6 +67,8 @@ public class TransactionDaoImpl implements TransactionDao {
 				transaction.setPrice(rs.getDouble("price"));
 				transaction.setQty(rs.getInt("qty"));
 				transaction.setTranType(rs.getString("trantype"));
+				//
+				System.out.println(rs.getInt("tranid"));
 				return transaction;
 			}			
 		}, params);

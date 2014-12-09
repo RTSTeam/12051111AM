@@ -1,6 +1,6 @@
 package com.mercury.service;
 
-import com.mercury.beans.TransactionInfo;
+import com.mercury.beans.OrderedInfo;
 import com.mercury.dao.TransactionDao;
 
 public class QueryOrderedService {
@@ -14,10 +14,10 @@ public class QueryOrderedService {
 		this.td = td;
 	}
 	
-	public TransactionInfo process(String userid) {
-		TransactionInfo transactionInfo = new TransactionInfo();
-		transactionInfo.setTransactions(td.findOrdered(userid));
-		return transactionInfo;
+	public OrderedInfo processQuery(String userid) {
+		OrderedInfo orderedInfo = new OrderedInfo();
+		orderedInfo.setOrdereds(td.findOrdered(userid));
+		return orderedInfo;
 	}
 	
 	

@@ -29,6 +29,9 @@
 <!-- credit card css -->
 <link rel="stylesheet" href="css/creditcard.css">
 
+<!-- shake css -->
+<link rel="stylesheet" href="css/csshake.min.css">
+
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript">
 	var avaiQty = 1 ;
@@ -98,14 +101,18 @@
 					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-
-				<p class="navbar-brand" href="">Hello, ${userid}</p>
+				<div class="shake shake-slow">
+					<p class="navbar-brand" href="">Good Afternoon, ${userid}</p>
+				</div>
 			</div>
 
 			<div id="navbar" class="navbar-collapse collapse">
 				<form class="navbar-form navbar-right" role="form">
+					<div class="shake shake-slow">
 					<a type="button" class="btn btn-primary"
-						href="<c:url value='/j_spring_security_logout'/>">Logout</a>
+						href="<c:url value='/j_spring_security_logout'/>">Logout
+					</a>
+					</div>
 				</form>
 			</div>
 		</div>
@@ -237,7 +244,7 @@
 										<tabset>
 										<tab heading="Enter new card">
 											
-											<div ng-show="canShow">
+											<div ng-show="true">
 												<div class="modal-header">
 													
 													<h4 class="modal-title" id="myModalLabel">Enter Credit
@@ -337,9 +344,7 @@
 											</div>	
 										</tab>
 										<tab heading="choose existing card">
-											<div ng-show="canShow">
-
-											</div>
+											
 										</tab>
 
 									</tabset>
@@ -354,8 +359,8 @@
 		</tab>
 		<!-- Transaction History --> 
 		<tab heading="Transaction History"
-			ng-click="getTransactionData('${userid}', 'ajaxResult'); hideShow()">
-
+			ng-click="getTransactionData('${userid}', 'ajaxResult')">
+			<div ng-show="showTransaction">
 			<table border="2" class="table table-hover">
 				<thead width="600px">
 					<tr>
@@ -370,20 +375,20 @@
 					<tr ng-repeat="transaction in transactions">
 						<td>{{transaction.tranID}}</td>
 						<td>{{transaction.ticketID}}</td>
-						<td>{{transaction.price}}</td>
+						<td>{{transaction.price * transaction.qty}}</td>
 						<td>{{transaction.qty}}</td>
 						<td>{{transaction.tranType}}</td>
 					</tr>
 				</tbody>
 			</table>
-
+		</div>
 		</tab> 
 		
 		
 		<!-- Personal Information --> 
 		<tab heading="Personal Information"
-			ng-click="getPersonInfoData('${userid}', 'ajaxResult')">
-		<div ng-show="canShow">
+			ng-click="getPersonInfoData('${userid}', 'ajaxResult'); hidePerson()">
+
 			<table border="2" width="600" class="table table-hover">
 				<thead>
 					<tr>
@@ -404,13 +409,13 @@
 					</tr>
 				</tbody>
 			</table>
-		</div>
+
 		</tab> 
 		
 		
 		<!-- REFUND -->
-		<tab heading="Ticket Refund" ng-click="getOrderedData('${userid}', 'ajaxResult'); hideShow()">
-
+		<tab heading="Ticket Refund" ng-click="getOrderedData('${userid}', 'ajaxResult')">
+		<div ng-show="showRefund">
 			<table border="2" class="table table-hover">
 				<thead>
 					<tr>
@@ -423,24 +428,24 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat="transaction in transactions">
-						<td>{{transaction.tranID}}</td>
-						<td>{{transaction.ticketID}}</td>
-						<td>{{transaction.price}}</td>
-						<td>{{transaction.qty}}</td>
-						<td>{{transaction.tranType}}</td>
+					<tr ng-repeat="ordered in ordereds">
+						<td>{{ordered.tranID}}</td>
+						<td>{{ordered.ticketID}}</td>
+						<td>{{ordered.price * ordered.qty}}</td>
+						<td>{{ordered.qty}}</td>
+						<td>{{ordered.tranType}}</td>
 						<td>
-							<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal" ng-click="doRefund(transaction.tranID, 'ajaxResult')">
+							<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#secondModal" ng-click="doRefund(ordered.tranID, 'ajaxResult')">
 							Refund
 							</button>
 							<div class="control-group">
 							<div class="controls">
-								<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+								<div class="modal fade" id="secondModal" tabindex="-1" role="dialog">
 							    	<div class="modal-dialog">
 							    		<div class="modal-content">
 									        <div class="modal-header">
 									        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-									        <h4 class="modal-title" id="myModalLabel">Your request will be processed in 1 minute.</h4>
+									        <h4 class="modal-title" id="myModalLabel">Your request will be processed. Thank you.</h4>
 									     
 									        <button type="button" class="btn btn-default" ng-clilck="$window.close()" data-dismiss="modal">Close</button>
 									        <button type="button" class="btn btn-default"><a href="http://localhost:8080/RTSProject/main.html">Go back</a></button>
@@ -455,7 +460,7 @@
 					</tr>
 				</tbody>
 			</table>
-
+			</div>
 		</tab> 
 		
 		</tabset>

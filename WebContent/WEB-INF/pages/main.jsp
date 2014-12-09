@@ -447,9 +447,8 @@
 									        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 									        <h4 class="modal-title" id="myModalLabel">Your request will be processed. Thank you.</h4>
 									     
-									        <button type="button" class="btn btn-default" ng-clilck="$window.close()" data-dismiss="modal">Close</button>
-									        <button type="button" class="btn btn-default"><a href="http://localhost:8080/RTSProject/main.html">Go back</a></button>
-									      
+									        <button type="button" class="btn btn-default" ng-click="getOrderedData('${userid}', 'ajaxResult')" data-dismiss="modal">Close</button>
+									       
 							    			</div>
 							  			</div>
 							    	</div>

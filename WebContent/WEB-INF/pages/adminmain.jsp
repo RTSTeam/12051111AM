@@ -35,7 +35,7 @@
 					<span class="icon-bar"></span>
 				</button>
 				
-				<p class="navbar-brand" href="">Hello, ${userid}</p>
+				<h2><p >Hello, ${userid}</p></h2>
 			</div>
 			
 			<div id="navbar" class="navbar-collapse collapse">
@@ -46,13 +46,13 @@
 		</div>
    </nav>
 
-  <tabset>
-	
+  <tabset class="padding" >
 	<!-- First Part -->
 	<!-- Personal Information --> 
-	<tab heading="Personal Information" ng-controller="AdminInfo" ng-click="getPersonInfoData('${userid}', 'ajaxResult')">
+	<tab class="tabFont" heading="Personal Information" ng-controller="AdminInfo" ng-init="getPersonInfoData('${userid}', 'ajaxResult')">
 		<div ng-show="canShow">
-			<table border="2" width="600" class="table table-hover">
+			</br>
+			<table width="600" class="table table-hover">
 				<thead>
 					<tr>
 						<th>Username</th>
@@ -76,66 +76,44 @@
 	</tab> 
 	
 	<!-- Second Part -->
-    <tab heading="Station Information" ng-controller="Station" ng-click="findAllStation()" >
-		<!--  <form name="tracmodify" class="form-inline" id="stationDiv1" role="form">
-			<div class="form-group" ng-show="canShowResult">
-				<h2><font color="green" id="welcome">Station List</font></h2>
-				<table border="1" width="200">
-					<thead>
-        				<tr>
-		          			<th>Station Abbreviation</th>
-		          			<th>Station Full Name</th>
-        				</tr>
-      				</thead>
-      				
-	      			<tbody>
-	        			<tr ng-repeat="station in stations">
-	          				<td>{{station.stationAbbr}}</td>
-	          				<td>{{station.stationFullName}}</td>
-	        			</tr>
-	      			</tbody>
-				</table>
-			</div>	  
-		</form>-->
+    <tab class="tabFont" heading="Station Information" ng-controller="Station" ng-click="findAllStation()" >
+		</br>
 		<form name="tracmodify" class="form-inline" id="stationDiv1" role="form">
-			Search: <input ng-model="searchText">
-			<table id="searchTextResults">
-			  <tr><th>Station Abbr</th><th>Station FullName</th></tr>
-			  <tr ng-repeat="station in stations | filter:searchText">
-			    <td>{{station.stationAbbr}}</td>
-			    <td>{{station.stationFullName}}</td>
-			  </tr>
-			</table>
-			<!-- <hr>
-			Any: <input ng-model="search.$"> <br>
-			Name only <input ng-model="search.name"><br>
-			Phone only <input ng-model="search.phone"><br>
-			Equality <input type="checkbox" ng-model="strict"><br>
-			<table id="searchObjResults">
-			  <tr><th>Name</th><th>Phone</th></tr>
-			  <tr ng-repeat="friendObj in friends | filter:search:strict">
-			    <td>{{friendObj.name}}</td>
-			    <td>{{friendObj.phone}}</td>
-			  </tr>
-			</table> -->
-		</form>
+			<div class="form-group">
+				<label class="padding" for="searchInput">
+				<h3>Search:</h3>
+				</label> 
+				<input type="text" class="form-control" id="searchInput" placeholder="Input station name" ng-model="searchText">
+			</div>
+			<div class="padding">
+				<table class="table table-hover" id="searchTextResults">
+				  <tr><th>Station Abbr</th><th>Station FullName</th></tr>
+				  <tr ng-repeat="station in stations | filter:searchText">
+				    <td>{{station.stationAbbr}}</td>
+				    <td>{{station.stationFullName}}</td>
+				  </tr>
+				</table>
+			</div>
+		 </form>
 		
 		<form name="insertform" class="form-inline" id="stationDiv2" role="form" >
-			<h2><font color="green" id="welcome">Please Insert A New</font></h2>
-			<div class="form-group" >
-      			<form name="userForm" class="css-form"  ng-submit="submitData(station, 'ajaxResult')" novalidate>
-
-	        		<div>
-	          			<input type="input" ng-model="station.abbrevation" name="stationabbrevation" placeholder="Station Abbrevation" required>
-	        		</div>
-      
-	        		<div>
-	      	  			<input type="input" ng-model="station.fullname" name="stationfullname" placeholder="Station Full Name" required>
-	        		</div>
-		 
-		      	<button type="button" ng-click="resetForm()" ng-disabled="!isUserChanged()">Reset</button>
-			  	<button type="button" ng-click="submitData(station, 'ajaxResult'); findAllStation()" ng-disabled="userForm.$invalid">Submit</button>
-	      		</form>
+			<h3><font id="welcome">Please Insert A New Station</font></h3>
+			<div class="padding" >
+				<div class="form-group" >
+	      			<form name="userForm" class="css-form"  ng-submit="submitData(station, 'ajaxResult')" novalidate>
+	
+		        		<div>
+		          			<input class="form-control" type="input" ng-model="station.abbrevation" name="stationabbrevation" placeholder="Station Abbrevation" required>
+		        		</div>
+	                    </br>
+		        		<div>
+		      	  			<input class="form-control" type="input" ng-model="station.fullname" name="stationfullname" placeholder="Station Full Name" required>
+		        		</div>
+						</br>
+			      	<button class="btn btn-primary" type="button" ng-click="resetForm()" ng-disabled="!isUserChanged()">Reset</button>
+				  	<button class="btn btn-primary" type="button" ng-click="submitData(station, 'ajaxResult'); findAllStation()" ng-disabled="userForm.$invalid">Submit</button>
+		      		</form>
+				</div>
 			</div>
 			
 			<div ng-show=canShowNewResult>
@@ -146,172 +124,177 @@
 	</tab>	
 	
 	<!-- Third Part -->
-    <tab heading="Ticket Information" ng-controller="Ticket" >
-		<div class="row">
-			<div class="col-md-2">
-				&nbsp; &nbsp; <input id="onewayRadio" type="radio" ng-model="ticketOption" value="finaallforqty" ng-change="findAllQty()"><label for="findall">Change ticket qty</label>
+    <tab class="tabFont" heading="Ticket Information" ng-controller="Ticket" >
+		<div class="padding">
+			<div class="row">
+				<div class="col-md-2">
+					<input id="onewayRadio" type="radio" ng-model="ticketOption" value="finaallforqty" ng-change="findAllQty()"><label for="findall">Change ticket qty</label>
+				</div>
+				<div class="col-md-2">
+					<input id="roundtripRadio" type="radio" ng-model="ticketOption" value="add" ng-change="queryAllStation()"/><label for="add">Add ticket info</label>
+				</div>		 
 			</div>
-			<div class="col-md-2">
-				&nbsp; &nbsp; <input id="roundtripRadio" type="radio" ng-model="ticketOption" value="add" ng-change="queryAllStation()"/><label for="add">Add ticket info</label>
-			</div>		 
 		</div>
 		
-		<form name="tracmodify" class="form-inline" role="form" ng-show="ticketOption == 'finaallforqty'">
-			<div class="form-group" ng-show="canShowResult">
-				<h2><font color="green" id="welcome">Add available tickets</font></h2>
-					<table border="2" class="table table-hover">
-						<thead>
-							<tr>
-								<th>Ticket ID</th>
-								<th>Total Quantity</th>
-								<th>Available Quantity</th>
-								<th>New Total Quantity</th>
-								<th>New Available Quantity</th>
-								<th>Change Quantity</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr ng-repeat="ticketqty in ticketqtys">
-								<td>{{ticketqty.ticketID}}</td>
-								<td>{{ticketqty.totalQty}}</td>
-								<td>{{ticketqty.avaiQty}}</td>
-								<td><input type="number" ng-model="newticket.totalqty" placeholder="New Total Quantity" min="0" required></td>
-								<td><input type="number" ng-model="newticket.availqty" placeholder="New Available Quantity" min="0" required></td>
-								<td>
-									<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModalUpdateQTY" ng-click="updateQty(ticketqty.ticketID, newticket, 'ajaxResult')">
-									Change
-									</button>
-									<div class="control-group">
-									<div class="controls">
-										<div class="modal fade" id="myModalUpdateQTY" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-									    	<div class="modal-dialog">
-									    		<div class="modal-content">
-											        <div class="modal-header">
-											        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-											        <h4 class="modal-title" id="myModalLabel">Your request will be processed in 1 minute.</h4>
-											     
-											        <button type="button" class="btn btn-default" ng-clilck="$window.close()" data-dismiss="modal">Close</button>
-											        <button type="button" class="btn btn-default"><a href="http://localhost:8080/RTSProject/adminmain.html">Go back</a></button>
-											      
-									    			</div>
-									  			</div>
-									    	</div>
+		<div class="paddingBottom">
+			<form name="tracmodify" class="form-inline" role="form" ng-show="ticketOption == 'finaallforqty'">
+				<div class="form-group" ng-show="canShowResult">
+					<h3><font id="welcome">Add available tickets</font></h3>
+						<table class="table table-hover" >
+							<thead>
+								<tr>
+									<th>Ticket ID</th>
+									<th>Total Quantity</th>
+									<th>Available Quantity</th>
+									<th>New Total Quantity</th>
+									<th>New Available Quantity</th>
+									<th>Change Quantity</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="ticketqty in ticketqtys">
+									<td>{{ticketqty.ticketID}}</td>
+									<td>{{ticketqty.totalQty}}</td>
+									<td>{{ticketqty.avaiQty}}</td>
+									<td><input class="form-control" type="number" ng-model="newticket.totalqty" placeholder="New Total Quantity" min="0" required></td>
+									<td><input class="form-control" type="number" ng-model="newticket.availqty" placeholder="New Available Quantity" min="0" required></td>
+									<td>
+										<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModalUpdateQTY" ng-click="updateQty(ticketqty.ticketID, newticket, 'ajaxResult')">
+										Change
+										</button>
+										<div class="control-group">
+										<div class="controls">
+											<div class="modal fade" id="myModalUpdateQTY" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+										    	<div class="modal-dialog">
+										    		<div class="modal-content">
+												        <div class="modal-header">
+												        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+												        <h4 class="modal-title" id="myModalLabel">Your request will be processed in 1 minute.</h4>
+												     
+												        <button type="button" class="btn btn-default" ng-clilck="$window.close()" data-dismiss="modal">Close</button>
+												        <button type="button" class="btn btn-default"><a href="http://localhost:8080/RTSProject/adminmain.html">Go back</a></button>
+												      
+										    			</div>
+										  			</div>
+										    	</div>
+											</div>
 										</div>
-									</div>
-									</div>
-								</td>		
-							</tr>
-						</tbody>
-					</table>
-			</div>	  
-		</form>
+										</div>
+									</td>		
+								</tr>
+							</tbody>
+						</table>
+				</div>	  
+			</form>
+		</div>
 		
-		 
-		<form name="insertform" class="form-inline" role="form" ng-show="ticketOption == 'add'" >
-			Please insert new information of ticket<br/>
-			
-			<div class="form-group" >
-      			<form name="userForm" class="css-form" ng-submit="submitNewData(ticket, 'ajaxResult')" novalidate>
-					<p></p>
-					<div class="controls">
-						<label for="departureStationSel">From:</label> <select
-							class="form-control" id="departureStationSel"
-							ng-model="ticket.departureStationValue"
-							ng-options="departureStation.stationFullName for departureStation in stationArray">
-						</select>
-					</div>
-					<div class="controls">
-						<label for="arrivalStationSel">To:&nbsp; &nbsp; &nbsp;</label> <select
-							class="form-control" id="arrivalStationSel"
-							ng-model="ticket.arrivalStationValue"
-							ng-options="arrivalStation.stationFullName for arrivalStation in stationArray">
-						</select>
-					</div>
-					<br />
-					
-					<div class="controls">
-						<label class="control-label"><i class="fa fa-calendar"></i>
-							Departure Time:</label><br>
-						<div class="form-group">
-							<input type="text" size="10" class="form-control"
-								ng-model="ticket.departureDate" data-autoclose="1"
-								placeholder="Date" bs-datepicker>
+		<div class="padding"> 
+			<form name="insertform" class="form-inline" role="form" ng-show="ticketOption == 'add'" >
+				<h3>Please insert new information of ticket</h3><br/>
+				
+				<div class="form-group" >
+	      			<form name="userForm" class="css-form" ng-submit="submitNewData(ticket, 'ajaxResult')" novalidate>
+						<p></p>
+						<div class="paddingBottom">
+							<div class="controls">
+								<label style="width:60px" for="departureStationSel">From:</label> <select
+									class="form-control" id="departureStationSel"
+									ng-model="ticket.departureStationValue"
+									ng-options="departureStation.stationFullName for departureStation in stationArray">
+								</select>
+							</div>
 						</div>
-						<div class="form-group" class="col-md-2">
-							<input type="text" size="8" class="form-control"
-								ng-model="ticket.departureTime" data-autoclose="1"
-								placeholder="Time" bs-timepicker>
+						<div class="controls">
+							<label style="width:60px" for="arrivalStationSel">To:</label> <select
+								class="form-control" id="arrivalStationSel"
+								ng-model="ticket.arrivalStationValue"
+								ng-options="arrivalStation.stationFullName for arrivalStation in stationArray">
+							</select>
 						</div>
-					</div>
-					<br />
-					
-					<div class="controls">
-						<label class="control-label"><i class="fa fa-calendar"></i>
-							Arrival Time:</label><br>
-						<div class="form-group">
-							<input type="text" size="10" class="form-control"
-								ng-model="ticket.arrivalDate" data-autoclose="1"
-								placeholder="Date" bs-datepicker>
+						<br/>
+						<div class="controls">
+							<label class="control-label"><i class="fa fa-calendar"></i>
+								Departure Time:</label><br>
+							<div class="form-group">
+								<input type="text" size="10" class="form-control"
+									ng-model="ticket.departureDate" data-autoclose="1"
+									placeholder="Date" bs-datepicker>
+							</div>
+							<div class="form-group" class="col-md-2">
+								<input type="text" size="8" class="form-control"
+									ng-model="ticket.departureTime" data-autoclose="1"
+									placeholder="Time" bs-timepicker>
+							</div>
 						</div>
-						<div class="form-group" class="col-md-2">
-							<input type="text" size="8" class="form-control"
-								ng-model="ticket.arrivalTime" data-autoclose="1"
-								placeholder="Time" bs-timepicker>
+						<br/>
+						<div class="controls">
+							<label class="control-label"><i class="fa fa-calendar"></i>
+								Arrival Time:</label><br>
+							<div class="form-group">
+								<input type="text" size="10" class="form-control"
+									ng-model="ticket.arrivalDate" data-autoclose="1"
+									placeholder="Date" bs-datepicker>
+							</div>
+							<div class="form-group" class="col-md-2">
+								<input type="text" size="8" class="form-control"
+									ng-model="ticket.arrivalTime" data-autoclose="1"
+									placeholder="Time" bs-timepicker>
+							</div>
 						</div>
-					</div>
-					<br />
-					
-					<div class="controls">
-						<label class="control-label">Price</label><br>
-						<div class="form-group">
-							<input type="number" ng-model="ticket.price" placeholder="Price" min="0" required>
-							<span class="error" ng-show="myForm.input.$error.required">
-							    Required!</span>
-							<span class="error" ng-show="myForm.input.$error.number">
-							    Not valid number!</span>
+						<br />
+						
+						<div class="controls">
+							<label class="control-label">Price</label><br>
+							<div class="form-group">
+								<input class="form-control" type="number" ng-model="ticket.price" placeholder="Price" min="0" required>
+								<span class="error" ng-show="myForm.input.$error.required">
+								    Required!</span>
+								<span class="error" ng-show="myForm.input.$error.number">
+								    Not valid number!</span>
+							</div>
 						</div>
-					</div>
-					<br />
-					
-					<div class="controls">
-						<label class="control-label">Total Quantity</label><br>
-						<div class="form-group">
-							<input type="number" ng-model="ticket.totalqty" placeholder="Total Quantity" min="0" required>
-							<span class="error" ng-show="myForm.input.$error.required">
-							    Required!</span>
-							<span class="error" ng-show="myForm.input.$error.number">
-							    Not valid number!</span>
+						<br />
+						
+						<div class="controls">
+							<label class="control-label">Total Quantity</label><br>
+							<div class="form-group">
+								<input class="form-control" type="number" ng-model="ticket.totalqty" placeholder="Total Quantity" min="0" required>
+								<span class="error" ng-show="myForm.input.$error.required">
+								    Required!</span>
+								<span class="error" ng-show="myForm.input.$error.number">
+								    Not valid number!</span>
+							</div>
 						</div>
-					</div>
-					<br />
-					
-					<div class="controls">
-						<label class="control-label">Available Quantity</label><br>
-						<div class="form-group">
-							<input type="number" ng-model="ticket.avalqty" placeholder="Available Quantity" min="0" required>
-							<span class="error" ng-show="myForm.input.$error.required">
-							    Required!</span>
-							<span class="error" ng-show="myForm.input.$error.number">
-							    Not valid number!</span>
+						<br />
+						
+						<div class="controls">
+							<label class="control-label">Available Quantity</label><br>
+							<div class="form-group">
+								<input class="form-control" type="number" ng-model="ticket.avalqty" placeholder="Available Quantity" min="0" required>
+								<span class="error" ng-show="myForm.input.$error.required">
+								    Required!</span>
+								<span class="error" ng-show="myForm.input.$error.number">
+								    Not valid number!</span>
+							</div>
 						</div>
-					</div>
-					<br />
-					<pre>form = {{ticket | json}}</pre>
-					<button type="button" ng-click="resetForm()" ng-disabled="!isUserChanged()">Reset</button>
-			  		<button type="button" ng-click="submitData(ticket, 'ajaxResult');resetForm()" ng-disabled="ticket.$invalid">Submit</button>
-				</form>
-			</div>
-			
-			
-			<div ng-show=canShowNewResult>
-				<h2><font color="green" id="welcome">You inserted a new ticket!</font></h2>
-			</div>
-		</form>
+						<br />
+						<button class="btn btn-primary"  type="button" ng-click="resetForm()" ng-disabled="!isUserChanged()">Reset</button>
+				  		<button class="btn btn-primary"  type="button" ng-click="submitData(ticket, 'ajaxResult');resetForm()" ng-disabled="ticket.$invalid">Submit</button>
+					</form>
+				</div>
+				
+				
+				<div ng-show=canShowNewResult>
+					<h2><font color="green" id="welcome">You inserted a new ticket!</font></h2>
+				</div>
+			</form>
+		</div>
 	</tab>
 		
 	<!-- Fourth Part -->
-	<tab heading="Refund" ng-controller="Refund" ng-click="getRefundingData('ajaxResult')">
-		<table border="2" class="table table-hover" ng-show="showTable">
+	<tab class="tabFont" heading="Refund"  ng-controller="Refund" ng-click="getRefundingData('ajaxResult')"><a id="refundTab"></a>
+		<div class="padding">
+			<table class="table table-hover" ng-show="showTable">
 				<thead>
 					<tr>
 						<th>Transaction ID</th>
@@ -342,8 +325,8 @@
 									        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 									        <h4 class="modal-title" id="myModalLabel">Your request will be processed in 1 minute.</h4>
 									     
-									        <button type="button" class="btn btn-default" ng-clilck="getRefundingData('ajaxResult')" data-dismiss="modal">Close</button>
-									        <button type="button" class="btn btn-default"><a href="http://localhost:8080/RTSProject/adminmain.html">Go back</a></button>
+									        <button type="button" class="btn btn-default" ng-click="getRefundingData('ajaxResult')" data-dismiss="modal">Close</button>
+
 									      
 							    			</div>
 							  			</div>
@@ -355,6 +338,7 @@
 					</tr>
 				</tbody>
 			</table>
+		</div>	
 	</tab>
 	
   </tabset>

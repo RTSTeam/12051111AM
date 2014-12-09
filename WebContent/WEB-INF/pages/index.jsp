@@ -37,13 +37,15 @@
     <meta name="viewpoint" content="width=device-width, initial-scale=1.0">
     <link href = "css/bootstrap.min.css" rel="stylesheet">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap.js"></script>
     <script src="js/registration.js"></script>
     <link rel="stylesheet" href="css/registration.css"> 
 
     <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
     <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
     <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/laptop.css" rel="stylesheet">
 	<script>
 	$(document).ready(function() {		
 		$("#jQName").on("blur", function() {
@@ -146,7 +148,7 @@
             <span class="icon-bar"></span>
           </button>
           
-          <a class="navbar-brand" href="http://zhengjunli.com">Railway Trading System</a>
+          <a class="navbar-brand" href="http://zhengjunli.com">Railway Ticketing System</a>
         </div>
 
         <div id="navbar" class="navbar-collapse collapse">
@@ -172,7 +174,7 @@
 
       </div><!--container-->
     </nav>
-
+    
 	<!-- wrong info -->
 	    <c:if test="${not empty SPRING_SECURITY_LAST_EXCEPTION}">
 	      <font color="red">
@@ -182,11 +184,13 @@
 			
     <div class="jumbotron">
       <div class="container">
-        <h1>Hello, world!</h1>
-        <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+        <h1>Welcome!</h1>
+        <p>The Railway Ticketing System is striving to deliver a high quality, safe, on-time 
+        rail passenger service that exceeds customer expectations. Learn all about it here from every angle.</p>
         <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
   			Sign up &raquo;
 		</button>
+		
         <!-- <p><a class="btn btn-primary btn-lg" href="http://localhost:8080/RTSProject/registration.html" role="button">Sign up &raquo;</a></p> -->
         <div ng-app="form-example1" class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		  <div ng-controller="appCtrl" class="modal-dialog">
@@ -281,11 +285,45 @@
 		    </div>
 		  </div>
 		</div>
+		<div id="macbook">
+          <div id="tour" class="carousel slide">
+            <ol class="carousel-indicators">
+              <li data-target="#tour" data-slide-to="0" class="active"></li>
+              <li data-target="#tour" data-slide-to="1"></li>
+              <li data-target="#tour" data-slide-to="2"></li>
+            </ol>
+
+            <div class="carousel-inner">
+              <div class="item active">
+                <img src="img/stock1.jpg">
+              </div>
+              <div class="item">
+                <img src="img/stock2.jpg">
+                <div class="carousel-caption">
+                  Photo #2 Caption
+                </div>
+              </div>
+              <div class="item">
+                <img src="img/stock3.jpg">
+                <div class="carousel-caption">
+                  Photo #3 Caption
+                </div>
+              </div>
+            </div> <!-- /.carousel-inner -->
+
+            <a class="left carousel-control" href="#tour" data-slide="prev">
+              <span class="glyphicon glyphicon-chevron-left"></span>
+            </a>
+            <a class="right carousel-control" href="#tour" data-slide="next">
+              <span class="glyphicon glyphicon-chevron-right"></span>
+            </a>
+          </div> <!-- /#tour -->
+        </div> <!-- /#macbook -->
       </div>
     </div>
     
 	<footer>
-        <p style="color:white">&copy; Jack, Andy, Charlie 2014</p>
+        <p style="color:white">&copy; Andy, Charlie, Jack 2014</p>
     </footer>
 
 	</div>

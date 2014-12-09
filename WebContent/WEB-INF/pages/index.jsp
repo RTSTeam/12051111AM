@@ -194,7 +194,7 @@
 			        <div class="control-group">
 			          <label class="control-label"  for="username">Username</label>
 			          <div class="controls">
-				          <input type="text" class="form-control" ng-model="user.username" id="jQName" name="username" ng-minlength="3" ng-maxlength="10" placeholder="User ID" username required/>
+				          <input type="text" class="form-control" ng-model="user.username" id="jQName" name="username" ng-minlength="3" ng-maxlength="10" placeholder="User ID" minlength="3" maxlength="15" username required/>
 				      <span class="alert" id="nameReq" style="display:none;" >User name required</span>
 				      <span class="alert" id="nameLength" style="display:none;" >Username length is invalid</span>
 				      <span class="alert" id="userExist" style="display:none;" >The user already exists</span>
@@ -254,7 +254,7 @@
 			        <div class="control-group" ng-controller="DatepickerDemoCtrl">
 			          <label class="control-label" for="lname">Birthday</label>
 			          <div class="controls">
-			           <input type="text" ng-model="user.birthday" name="birthday" class="form-control" datepicker-popup="dd-MMMM-yy" is-open="opened" min-date="1990-01-01" max-date="maxDate" datepicker-options="dateOptions"  data-date-format="mm/dd/yyyy" placeholder="Date of Birthday" ng-required="true" close-text="Close" required/>
+			           <input type="text" ng-model="user.birthday" name="birthday" ng-disabled="true" class="form-control" datepicker-popup="dd-MMMM-yy" is-open="opened" min-date="1990-01-01" max-date="maxDate" datepicker-options="dateOptions"  data-date-format="mm/dd/yyyy" placeholder="Date of Birthday" ng-required="true" close-text="Close" required/>
 			                    <button type="button" class="btn btn-default" ng-click="open($event)">
 			                      <i class="glyphicon glyphicon-calendar"></i>
 			                    </button>
@@ -277,6 +277,39 @@
       </div>
     </div>
     
+    
+    <div id="top" class="jumbotron">
+      <div class="container">
+        <div id="macbook">
+          <div id="tour" class="carousel slide">
+            <ol class="carousel-indicators">
+              <li data-target="#tour" data-slide-to="0" class="active"></li>
+              <li data-target="#tour" data-slide-to="1"></li>
+              <li data-target="#tour" data-slide-to="2"></li>
+            </ol>
+
+            <div class="carousel-inner">
+              <div class="item active">
+                <img src="img/railway.jpg">
+              </div>
+              <div class="item">
+                <img src="img/grandcentral.jpg">
+              </div>
+              <div class="item">
+                <img src="img/stock3.jpg">
+              </div>
+            </div> <!-- /.carousel-inner -->
+
+            <a class="left carousel-control" href="#tour" data-slide="prev">
+              <span class="glyphicon glyphicon-chevron-left"></span>
+            </a>
+            <a class="right carousel-control" href="#tour" data-slide="next">
+              <span class="glyphicon glyphicon-chevron-right"></span>
+            </a>
+          </div> <!-- /#tour -->
+        </div> <!-- /#macbook -->
+      </div> <!-- /.container -->
+    </div> <!-- /#top.jumbotron -->
 	<footer>
         <p style="color:white">&copy; Andy, Charlie, Jack 2014</p>
     </footer>

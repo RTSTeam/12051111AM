@@ -232,6 +232,7 @@ app.controller('SearchCtrl', function ($scope, $window, $http) {
 			price: ticket.price,
 			qty: $scope.user.adultsValue + $scope.user.seniorsValue + $scope.user.childrenValue 
 		});
+		alert("You successfully bought the ticket!");
 		$http({
 			method: "POST",
 			url: "http://localhost:8080/RTSProject/rest/checkout",
@@ -241,6 +242,7 @@ app.controller('SearchCtrl', function ($scope, $window, $http) {
 			$scope[resultVarName] = data;
 			if(angular.isArray(data.checkout)){
 				$scope.checkouts = data.checkout;
+				
 			} else if(data.checkout==null){
 			}
 			else{
@@ -360,15 +362,21 @@ app.filter
 
 
 app.directive('luhnCheck', function() {
+	
+	
+	
+	
 	return {
 		restrict: 'A',
 		require: 'ngModel',
 		link: function(scope, element, attributes, ngModel) {
 
+			
 			function luhnCheck(value) {
 				ngModel.$setValidity('luhn-check', luhnChk(value));
 				return value;
 			}
+			
 
 			ngModel.$parsers.push(luhnCheck);
 			ngModel.$formatters.push(luhnCheck);
@@ -376,5 +384,7 @@ app.directive('luhnCheck', function() {
 
 	};
 });
+
+
 
 

@@ -41,7 +41,7 @@ public class SendJavaMail {
             
             // add content to body
             MimeBodyPart messageBodyPart = new MimeBodyPart();
-            String content="Hi, "+ username + "<br>"+"&nbsp;&nbsp;&nbsp;Thank you for registraion RTS account. Thank you very much."+"<br><br>"+ "Best Regards"+"<br>";
+            String content="Hi, "+ username + "<br><br>"+"&nbsp;&nbsp;&nbsp;Thank you for registing RTS account."+"<br><br>"+ "Best Regards,"+"<br>";
             String signature="RTS team"+"<br>";
             String allContents=content+"<br>"+addColor(signature, Color.BLUE);
             messageBodyPart.setContent(allContents, "text/html");

@@ -12,23 +12,11 @@
 	<!-- search css -->
 	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
-
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular-resource.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-  
-    <script src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.0.js"></script>
-  
+ 
     <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
-    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
-    <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-  
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
-  
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/angular-strap/2.1.2/angular-strap.min.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/angular-strap/2.1.2/angular-strap.tpl.min.js"></script>
-  
+    
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
     <!-- added -->
@@ -36,16 +24,10 @@
     <!--mobile version-->
     <meta name="viewpoint" content="width=device-width, initial-scale=1.0">
     <link href = "css/bootstrap.min.css" rel="stylesheet">
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="js/bootstrap.js"></script>
-    <script src="js/registration.js"></script>
     <link rel="stylesheet" href="css/registration.css"> 
-
     <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
-    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
-    <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/laptop.css" rel="stylesheet">
+
 	<script>
 	$(document).ready(function() {		
 		$("#jQName").on("blur", function() {
@@ -169,18 +151,24 @@
 			  <label for="rememberme" style="color: white">Remember me:</label>
               <input type="checkbox" name="_spring_security_remember_me" id="rememberme"/>
             </div>
+
           </form>
         </div><!--/.navbar-collapse -->
 
       </div><!--container-->
     </nav>
     
-	<!-- wrong info -->
+         	<!-- wrong info -->	
+
 	    <c:if test="${not empty SPRING_SECURITY_LAST_EXCEPTION}">
-	      <font color="red">
-	        Invalid Id or Password <br/><br/>
-	      </font>
-    	</c:if>
+
+		     <font color="red">
+		       Invalid Id or Password
+		     </font>
+
+	  	</c:if>
+
+	    
 			
     <div class="jumbotron">
       <div class="container">
@@ -285,40 +273,7 @@
 		    </div>
 		  </div>
 		</div>
-		<div id="macbook">
-          <div id="tour" class="carousel slide">
-            <ol class="carousel-indicators">
-              <li data-target="#tour" data-slide-to="0" class="active"></li>
-              <li data-target="#tour" data-slide-to="1"></li>
-              <li data-target="#tour" data-slide-to="2"></li>
-            </ol>
-
-            <div class="carousel-inner">
-              <div class="item active">
-                <img src="img/stock1.jpg">
-              </div>
-              <div class="item">
-                <img src="img/stock2.jpg">
-                <div class="carousel-caption">
-                  Photo #2 Caption
-                </div>
-              </div>
-              <div class="item">
-                <img src="img/stock3.jpg">
-                <div class="carousel-caption">
-                  Photo #3 Caption
-                </div>
-              </div>
-            </div> <!-- /.carousel-inner -->
-
-            <a class="left carousel-control" href="#tour" data-slide="prev">
-              <span class="glyphicon glyphicon-chevron-left"></span>
-            </a>
-            <a class="right carousel-control" href="#tour" data-slide="next">
-              <span class="glyphicon glyphicon-chevron-right"></span>
-            </a>
-          </div> <!-- /#tour -->
-        </div> <!-- /#macbook -->
+		
       </div>
     </div>
     
@@ -340,6 +295,19 @@
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/angular-strap/2.1.2/angular-strap.min.js"></script>
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/angular-strap/2.1.2/angular-strap.tpl.min.js"></script>
 
-
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular-resource.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>  
+    <script src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.0.js"></script>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/angular-strap/2.1.2/angular-strap.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/angular-strap/2.1.2/angular-strap.tpl.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/registration.js"></script>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    
 </body>
 </html>

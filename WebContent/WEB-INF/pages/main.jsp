@@ -110,7 +110,7 @@
 				<form class="navbar-form navbar-right" role="form">
 					<div class="shake shake-slow">
 					<a type="button" class="btn btn-primary"
-						href="<c:url value='/j_spring_security_logout'/>">Logout
+						href="<c:url value='/j_spring_security_logout'/>">I am Logout! Can you find me?
 					</a>
 					</div>
 				</form>
@@ -240,9 +240,6 @@
 								aria-hidden="true">
 								<div class="modal-dialog">
 									<div class="modal-content">
-									
-										<tabset>
-										<tab heading="Enter new card">
 											
 											<div ng-show="true">
 												<div class="modal-header">
@@ -258,22 +255,27 @@
 														<br/>
 														<!-- card number -->
 															<input style="width:200px" class="form-control" type="text" name="creditCard"
-																ng-model="ccinfo.number" required data-credit-card-type
+																ng-model="ccinfo.number" required 
 																data-ng-pattern="/^[0-9]+$/" data-ng-minlength="15"
-																ng-model-options="{ updateOn: 'blur' }" luhn-check
+																ng-model-options="{ updateOn: 'blur' }" luhn-check type-check
 																maxlength="19" placeholder="Card Number">{{ccinfo.type}}
 															<br/>
-															<span ng-show="paymentForm.creditCard.$error.pattern">Credit
+															<span style="color:red"
+																	ng-show="paymentForm.creditCard.$error['type-check']"
+																	class='error'>Invalid card type</span>
+															<span style="color:red" ng-show="paymentForm.creditCard.$error.pattern">Credit
 																card must consist of only numbers</span> 
-															<span
+															<span style="color:red"
 																ng-show="paymentForm.creditCard.$error.minlength">Credit
 																card must be 15-19 digits</span> 
-															<span ng-show="paymentForm.creditCard.$error.invalid">Credit
+															<span style="color:red" ng-show="paymentForm.creditCard.$error.invalid">Credit
 																card must be a valid Amex, Visa, Discover, or Master Card</span>
-															<span
-																ng-show="paymentForm.creditCard.$error['luhn-check']"
-																class='error'>Error: failed Luhn check</span> 
-															<span
+															<div class="shake shake-slow">
+																<span style="color:red"
+																	ng-show="!(paymentForm.creditCard.$error.minlength) && paymentForm.creditCard.$error['luhn-check']"
+																	class='error'>Invalid card number</span>
+															</div>	 
+															<span style="color:red"
 																ng-show="paymentForm.creditCard.required && paymentForm.creditCard.$pristine">Credit
 																Card number required</span> 
 																
@@ -286,8 +288,7 @@
 
 															<div
 																ng-show="paymentForm.submitAttempt && !paymentForm.$valid">
-																<div ng-show="myForm.number.$error['luhn-check']"
-																	class='error'>Invalid card number</div>
+															
 																<div ng-show="paymentForm.securityCode.$error.pattern">Security
 																	code must contain only numbers</div>
 																<div ng-show="paymentForm.securityCode.$error.minlength">Security
@@ -342,12 +343,7 @@
 												</div>
 
 											</div>	
-										</tab>
-										<tab heading="choose existing card">
-											
-										</tab>
 
-									</tabset>
 									</div>
 								</div>
 							</div>

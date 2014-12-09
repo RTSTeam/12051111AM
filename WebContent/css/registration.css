@@ -13,3 +13,8 @@ input.ng-valid.ng-dirty {
 #nameLength {color: red;}
 
 #userExist {color: red;}
+
+.error_signin {
+	left: 20px;
+	font-color: green;
+}

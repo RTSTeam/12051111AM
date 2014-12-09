@@ -5,6 +5,9 @@
 .padding {
     padding-left: 20px;
 }
+.padding-all {
+	padding: 20px;
+}
 .widthcontrols {
 	width:100px;
 }

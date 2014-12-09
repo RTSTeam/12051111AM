@@ -117,7 +117,8 @@
 			</div>
 		</div>
 		</nav>
-		<tabset> <tab heading="Search">
+		<tabset class="padding"> 
+		<tab heading="Search">
 		<div class="row">
 			<div class="col-md-6">
 				<form name="userForm" class="css-form"
@@ -357,8 +358,8 @@
 		<tab heading="Transaction History"
 			ng-click="getTransactionData('${userid}', 'ajaxResult')">
 			<div ng-show="showTransaction">
-			<table border="2" class="table table-hover">
-				<thead width="600px">
+			<table class="table table-hover">
+				<thead>
 					<tr>
 						<th>Transaction ID</th>
 						<th>Ticket ID</th>
@@ -367,7 +368,7 @@
 						<th>Transaction Type</th>
 					</tr>
 				</thead>
-				<tbody width="600px">
+				<tbody>
 					<tr ng-repeat="transaction in transactions">
 						<td>{{transaction.tranID}}</td>
 						<td>{{transaction.ticketID}}</td>
@@ -385,7 +386,7 @@
 		<tab heading="Personal Information"
 			ng-click="getPersonInfoData('${userid}', 'ajaxResult'); hidePerson()">
 
-			<table border="2" width="600" class="table table-hover">
+			<table class="table table-hover">
 				<thead>
 					<tr>
 						<th>Username</th>
@@ -412,7 +413,7 @@
 		<!-- REFUND -->
 		<tab heading="Ticket Refund" ng-click="getOrderedData('${userid}', 'ajaxResult')">
 		<div ng-show="showRefund">
-			<table border="2" class="table table-hover">
+			<table class="table table-hover">
 				<thead>
 					<tr>
 						<th>Transaction ID</th>

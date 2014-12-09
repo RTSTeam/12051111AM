@@ -166,13 +166,10 @@
 		       Invalid Id or Password
 		     </font>
 
-	  	</c:if>
-
-	    
-			
+	  	</c:if>			
     <div class="jumbotron">
       <div class="container">
-        <h1>Welcome!</h1>
+        <h3>Welcome!</h3>
         <p>The Railway Ticketing System is striving to deliver a high quality, safe, on-time 
         rail passenger service that exceeds customer expectations. Learn all about it here from every angle.</p>
         <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
@@ -280,7 +277,6 @@
     
     <div id="top" class="jumbotron">
       <div class="container">
-        <div id="macbook">
           <div id="tour" class="carousel slide">
             <ol class="carousel-indicators">
               <li data-target="#tour" data-slide-to="0" class="active"></li>
@@ -307,7 +303,6 @@
               <span class="glyphicon glyphicon-chevron-right"></span>
             </a>
           </div> <!-- /#tour -->
-        </div> <!-- /#macbook -->
       </div> <!-- /.container -->
     </div> <!-- /#top.jumbotron -->
 	<footer>
